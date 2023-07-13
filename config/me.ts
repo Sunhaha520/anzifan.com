@@ -3,12 +3,12 @@ import { Gmail, Java, Python , Javascript, Typescript, Swift, Mysql, Realm, Mong
 
 export const me = {
     site: "https://www.anzifan.com",
-    name: '小阿宇de小站💯',
+    name: '异次元de机智君💯',
     bio: '💻 🎨 🎮 ⚡️',
     social: [
         ...links,
         {
-            url: 'mailto:dereksunmo@163.com',
+            url: 'mailto:541297173@qq.com',
             icon: Gmail,
             name: 'Email',
             fill: "fill-gray-400",
@@ -23,30 +23,63 @@ export const me = {
     ],
     education: [
         {
-            name: 'Nanjing Forestry University',
-            time: '2019-2023',
-            degree: 'BS, Civil Engineering',
+            name: 'Nanjing University of Posts and Telecommunications',
+            time: '2016-2020',
+            degree: 'BS, Computer Science',
+            color: 'blue',
+            logo : "/static/images/njupt.png",
+        },
+        {
+            name: 'New York Institute of Technology',
+            time: '2016-2020*',
+            degree: 'BS, Computer Science',
             color: 'yellow',
             logo : "/static/images/nyit.png",
+        },
+        {
+            name: 'Northeastern University',
+            time: '2021-2022',
+            degree: 'MS, Computer Software Engineering',
+            color: 'red',
+            logo : "/static/images/neu.png",
         }
     ],
     publications: [
         {
-            title: 'Software works of parking lot vacancy detection system developed by opencv',
+            title: 'Exploration of Acoustic and Lexical Cues for the INTERSPEECH 2020 Computational Paralinguistic Challenge',
             authors: [
-                { name: "Derek Sun", },
+                { name: "Ziqing Yang", },
+                {
+                    name: "Zifan An",
+                    me: true
+                },
+                { name: "Zehao Fan" },
+                { name: "Chengye Jing" },
+                { name: "Houwei Cao*" }
             ],
-            website: "https://github.com/sunhaha520",
-            link: "https://www.ccopyright.com.cn/",
+            website: "https://sites.google.com/nyit.edu/seniorproject2020-interspeech",
+            link: "https://par.nsf.gov/biblio/10282648-exploration-acoustic-lexical-cues-interspeech-computational-paralinguistic-challenge",
             tags: [
                 {
-                    name: "opencv",
+                    name: "INTERSPEECH 2020",
                     color: "blue"
                 },
                 {
-                    name: "Python",
+                    name: "NYIT",
                     color: "yellow"
-                }
+                },
+                {
+                    name: "lexical features",
+                    color: "red"
+                },
+                {
+                    name: "fisher vector",
+                    color: "green"
+                },
+                {
+                    name: "model fusion",
+                    color: "purple"
+                },
                 // {
                 //     name: "Computational Paralinguistic Challenge",
                 //     color: "green"
@@ -56,9 +89,16 @@ export const me = {
     ],
     projects: [
         {
-            name: "Machine-Vision-Project",
-            description: "一些好玩的机器视觉项目 一些好玩的机器视觉项目，基于OpenCV",
-            tag: ["OpenCV","Object Recognition","Python"],
+            name: "Astraios",
+            description: "A GitHub Star Management App, based on SwiftUI and Combine.",
+            tip: "Coming Soon on App Store",
+            images: ["/static/images/Astraios/4.png", "/static/images/Astraios/3.png", "/static/images/Astraios/2.png", "/static/images/Astraios/5.png", "/static/images/Astraios/7.png"],
+            icon: "/static/images/Astraios/astraios.png",
+        },
+        {
+            name: "Pokémon Recommender",
+            description: "A iOS Pokédex with an original recommendation algorithm that considers multiple factors",
+            tag: ["Web Crawler","Database Design","Recommendation algorithm"],
             video: "/static/videos/pokemon.mp4",
             icon: "/static/images/pokemon.png"
         }
