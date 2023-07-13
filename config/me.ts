@@ -28,7 +28,7 @@ export const me = {
             degree: 'BS, Civil Engineering',
             color: 'yellow',
             logo : "/static/images/nyit.png",
-        },
+        }
     ],
     publications: [
         {
