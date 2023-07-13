@@ -2,13 +2,13 @@ import { links } from '../config/links'
 import { Gmail, Java, Python , Javascript, Typescript, Swift, Mysql, Realm, Mongodb, Html5, CssThree, ReactJs, Nodedotjs, Nextdotjs, Vuedotjs, Tailwindcss, Spring, Springboot, Stylus , Scikitlearn, Tensorflow, Docker, Git, Redis, Apachehadoop, Postman} from '@icons-pack/react-simple-icons'
 
 export const me = {
-    site: "https://www.anzifan.com",
-    name: '异次元de机智君💯',
+    site: "https://hk.xiaoayu.ren",
+    name: '阿愚君de小站💯',
     bio: '💻 🎨 🎮 ⚡️',
     social: [
         ...links,
         {
-            url: 'mailto:541297173@qq.com',
+            url: 'mailto:dereksun@163.com',
             icon: Gmail,
             name: 'Email',
             fill: "fill-gray-400",
@@ -23,62 +23,50 @@ export const me = {
     ],
     education: [
         {
-            name: 'Nanjing University of Posts and Telecommunications',
-            time: '2016-2020',
-            degree: 'BS, Computer Science',
+            name: 'Nanjing Forestry University',
+            time: '2019-2023',
+            degree: 'BS, Civil Engineering',
             color: 'blue',
-            logo : "/static/images/njupt.png",
-        },
-        {
-            name: 'New York Institute of Technology',
-            time: '2016-2020*',
-            degree: 'BS, Computer Science',
-            color: 'yellow',
             logo : "/static/images/nyit.png",
         },
         {
-            name: 'Northeastern University',
-            time: '2021-2022',
-            degree: 'MS, Computer Software Engineering',
+            name: 'City University of Hong Kong(Maybe)',
+            time: '2023-2024*',
+            degree: 'MS, Data Analysis',
+            color: 'yellow',
+            logo : "/static/images/njupt.png",
+        },
+        {
+            name: 'University of Macau(Maybe)',
+            time: '2024-2027',
+            degree: 'PHD, Artificial Intelligence',
             color: 'red',
             logo : "/static/images/neu.png",
         }
     ],
     publications: [
         {
-            title: 'Exploration of Acoustic and Lexical Cues for the INTERSPEECH 2020 Computational Paralinguistic Challenge',
+            title: 'OpenCV-based parking lot vacancy detection software works',
             authors: [
-                { name: "Ziqing Yang", },
                 {
-                    name: "Zifan An",
+                    name: "Derek Sun",
                     me: true
-                },
-                { name: "Zehao Fan" },
-                { name: "Chengye Jing" },
-                { name: "Houwei Cao*" }
+                }
             ],
-            website: "https://sites.google.com/nyit.edu/seniorproject2020-interspeech",
-            link: "https://par.nsf.gov/biblio/10282648-exploration-acoustic-lexical-cues-interspeech-computational-paralinguistic-challenge",
+            website: "https://github.com/Sunhaha520/Machine-Vision-Project",
+            link: "https://www.ccopyright.com.cn/",
             tags: [
                 {
-                    name: "INTERSPEECH 2020",
+                    name: "OpenCV",
                     color: "blue"
                 },
                 {
-                    name: "NYIT",
+                    name: "Python",
                     color: "yellow"
                 },
                 {
-                    name: "lexical features",
+                    name: "Object Detection",
                     color: "red"
-                },
-                {
-                    name: "fisher vector",
-                    color: "green"
-                },
-                {
-                    name: "model fusion",
-                    color: "purple"
                 },
                 // {
                 //     name: "Computational Paralinguistic Challenge",
@@ -89,16 +77,16 @@ export const me = {
     ],
     projects: [
         {
-            name: "Astraios",
-            description: "A GitHub Star Management App, based on SwiftUI and Combine.",
-            tip: "Coming Soon on App Store",
+            name: "NJFU-WiFi-Tools",
+            description: "Nanjing Forestry University campus network cracking software.",
+            tip: "Support linux, windows, ios and Android",
             images: ["/static/images/Astraios/4.png", "/static/images/Astraios/3.png", "/static/images/Astraios/2.png", "/static/images/Astraios/5.png", "/static/images/Astraios/7.png"],
             icon: "/static/images/Astraios/astraios.png",
         },
         {
-            name: "Pokémon Recommender",
-            description: "A iOS Pokédex with an original recommendation algorithm that considers multiple factors",
-            tag: ["Web Crawler","Database Design","Recommendation algorithm"],
+            name: "Machine-Vision-Project",
+            description: "Some interesting opencv projects.",
+            tag: ["OpenCV","Python","Object Detection"],
             video: "/static/videos/pokemon.mp4",
             icon: "/static/images/pokemon.png"
         }
