@@ -35,10 +35,6 @@ export const me = {
             title: 'Software works of parking lot vacancy detection system developed by opencv',
             authors: [
                 { name: "Derek Sun", },
-                {
-                    name: "Derek Sun",
-                    me: true
-                }
             ],
             website: "https://github.com/sunhaha520",
             link: "https://www.ccopyright.com.cn/",
