@@ -24,7 +24,7 @@ export const me = {
     education: [
         {
             name: 'Nanjing Forestry University',
-            time: '2019-2023*',
+            time: '2019-2023',
             degree: 'BS, Civil Engineering',
             color: 'yellow',
             logo : "/static/images/nyit.png",
@@ -50,7 +50,7 @@ export const me = {
                 {
                     name: "Python",
                     color: "yellow"
-                },
+                }
                 // {
                 //     name: "Computational Paralinguistic Challenge",
                 //     color: "green"
