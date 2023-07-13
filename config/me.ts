@@ -19,18 +19,44 @@ export const me = {
         },
     ],
     overview : [
-        
+        //无
     ],
-    education: [
+    education: [ //不生效的修改pages里的me.tsx，很简单
         {
-            name: 'Nanjing Forestry University',
-            time: '2019-2023',
-            degree: 'BS, Civil Engineering',
-            color: 'blue',
-            logo : "/static/images/nyit.png",
+            name: 'Nanjing Forestry University', //名称，不生效
+            time: '2019-2023',//经历时间,不生效
+            degree: 'BS,Civil Engineering',//Educations中的无序列表
+            color: 'blue', //无序列表颜色
+            logo : "/static/images/njupt.png",//不生效
         }
     ],
-
+    publications: [ //获得奖项
+        {
+            title: '暂时无获奖记录',//获奖名称
+            authors: [
+                {
+                    name: "'Derek'",  //获奖人名称
+                    me: true //是否为自己，是有加粗特效
+                }
+								{ name: "John Doe" }, //其他获奖人名称
+                { name: "Chengye Jing" },
+                { name: "Houwei Cao*" }
+            ],
+            website: "https://sites.google.com/nyit.edu/seniorproject2020-interspeech",//获奖介绍
+            link: "https://par.nsf.gov/biblio/10282648-exploration-acoustic-lexical-cues-interspeech-computational-paralinguistic-challenge", //地址（Download 按钮）
+            tags: [ //底下的标签
+                {
+                    name: "无", 
+                    color: "blue"
+                }
+            ]
+        }
+    ],
+    projects: [ //项目
+				//项目板块一
+        
+    ],
+		//不用管
     skills : [[
         { name: "Java", color: "bg-[#007396]", icon: Java},
         { name: "Python", color: "bg-[#3776AB]", icon: Python},
