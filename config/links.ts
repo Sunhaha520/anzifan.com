@@ -18,18 +18,18 @@ export type LinkType = {
 
 export const links : readonly [LinkType, LinkType, LinkType, LinkType, LinkType] = [
     {
-        url: 'https://github.com/MannyCooper',
+        url: 'https://github.com/Sunhaha520',
         icon: Github,
         color: 'from-bg-[#24292f] to-bg-[#040d21]',
         fill: "fill-[#181717]",
         border: "border-[#181717]",
         text:"text-[#181717]",
         shadow: "shadow-true-gray-400",
-        id: "MannyCooper",
+        id: "Sunhaha520",
         name: "GitHub"
     },
     {
-        url: 'https://sspai.com/u/mannycooper/updates',
+        url: 'https://sspai.com/u/opbbxa00/updates',
         icon: Sspai,
         color: 'from-bg-[#d7161c] to-bg-[#fc281a]',
         fill: "fill-[#da282a]",
@@ -40,7 +40,7 @@ export const links : readonly [LinkType, LinkType, LinkType, LinkType, LinkType]
     },
     {
         // # banned
-        url: 'https://www.zhihu.com/people/an-zi-fan-62',
+        url: 'https://www.zhihu.com/people/la-la-la-93-44-95',
         icon: Zhihu,
         color: 'from-true-gray-400 to-true-gray-300 dark:(from-true-gray-600 to-true-gray-500)',
         fill: "fill-[#0084FF]",
@@ -51,7 +51,7 @@ export const links : readonly [LinkType, LinkType, LinkType, LinkType, LinkType]
         name: "知乎"
     },
     {
-        url: 'https://dribbble.com/anzifan',
+        url: 'https://dribbble.com/ayuaayuyu',
         icon: Dribbble,
         fill: "fill-[#EA4C89]",
         border: "border-[#EA4C89]",
@@ -61,7 +61,7 @@ export const links : readonly [LinkType, LinkType, LinkType, LinkType, LinkType]
         name: 'Dribbble'
     },
     {
-        url: 'http://linkedin.com/in/zifan-an/',
+        url: 'http://linkedin.com/in/dereksunmo/',
         icon: Linkedin,
         fill: "fill-[#0A66C2]",
         border: "border-[#0A66C2]",
