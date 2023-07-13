@@ -2,8 +2,8 @@ import { links } from '../config/links'
 import { Gmail, Java, Python , Javascript, Typescript, Swift, Mysql, Realm, Mongodb, Html5, CssThree, ReactJs, Nodedotjs, Nextdotjs, Vuedotjs, Tailwindcss, Spring, Springboot, Stylus , Scikitlearn, Tensorflow, Docker, Git, Redis, Apachehadoop, Postman} from '@icons-pack/react-simple-icons'
 
 export const me = {
-    site: "https://hk.xiaoayu.ren",
-    name: '阿宇君de小站💯',
+    site: "https://www.anzifan.com",
+    name: '小阿宇de小站💯',
     bio: '💻 🎨 🎮 ⚡️',
     social: [
         ...links,
@@ -19,44 +19,54 @@ export const me = {
         },
     ],
     overview : [
-        //无
+        
     ],
-    education: [ //不生效的修改pages里的me.tsx，很简单
+    education: [
         {
-            name: 'Nanjing Forestry University', //名称，不生效
-            time: '2019-2023',//经历时间,不生效
-            degree: 'BS,Civil Engineering',//Educations中的无序列表
-            color: 'blue', //无序列表颜色
-            logo : "/static/images/njupt.png",//不生效
-        }
+            name: 'Nanjing Forestry University',
+            time: '2019-2023*',
+            degree: 'BS, Civil Engineering',
+            color: 'yellow',
+            logo : "/static/images/nyit.png",
+        },
     ],
-    publications: [ //获得奖项
+    publications: [
         {
-            title: '暂时无获奖记录',//获奖名称
+            title: 'Software works of parking lot vacancy detection system developed by opencv',
             authors: [
+                { name: "Derek Sun", },
                 {
-                    name: "'Derek'",  //获奖人名称
-                    me: true //是否为自己，是有加粗特效
+                    name: "Derek Sun",
+                    me: true
                 }
-								{ name: "John Doe" }, //其他获奖人名称
-                { name: "Chengye Jing" },
-                { name: "Houwei Cao*" }
             ],
-            website: "https://sites.google.com/nyit.edu/seniorproject2020-interspeech",//获奖介绍
-            link: "https://par.nsf.gov/biblio/10282648-exploration-acoustic-lexical-cues-interspeech-computational-paralinguistic-challenge", //地址（Download 按钮）
-            tags: [ //底下的标签
+            website: "https://github.com/sunhaha520",
+            link: "https://www.ccopyright.com.cn/",
+            tags: [
                 {
-                    name: "无", 
+                    name: "opencv",
                     color: "blue"
-                }
+                },
+                {
+                    name: "Python",
+                    color: "yellow"
+                },
+                // {
+                //     name: "Computational Paralinguistic Challenge",
+                //     color: "green"
+                // }
             ]
         }
     ],
-    projects: [ //项目
-				//项目板块一
-        
+    projects: [
+        {
+            name: "Machine-Vision-Project",
+            description: "一些好玩的机器视觉项目 一些好玩的机器视觉项目，基于OpenCV",
+            tag: ["OpenCV","Object Recognition","Python"],
+            video: "/static/videos/pokemon.mp4",
+            icon: "/static/images/pokemon.png"
+        }
     ],
-		//不用管
     skills : [[
         { name: "Java", color: "bg-[#007396]", icon: Java},
         { name: "Python", color: "bg-[#3776AB]", icon: Python},
