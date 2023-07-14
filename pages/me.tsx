@@ -73,7 +73,7 @@ const Overview = () => {
                     Hey there 👋
                 </div>
                 <div className="text-lg font-semibold xs:text-2xl sm:text-3xl md:text-4xl whitespace-nowrap">
-                    {`I'm Zifan An `}
+                    {`I'm Zhenyu Sun `}
                     {/* <span className="text-sm">(a guy)</span> */}
                 </div>
                 {/* </div> */}
@@ -84,7 +84,7 @@ const Overview = () => {
                     Intersted in</p>
                 <div className="text-center">
                     <p className="text-sm font-semibold xs:text-xl sm:text-2xl md:text-3xl">
-                        Web & Mobile Development, Machine Learning
+                        Web & Computer Vision, Structural Design
                     </p>
 
                 </div>
@@ -100,7 +100,7 @@ const Overview = () => {
                             Developer
                         </span>
                         <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-indigo-500">
-                            Designer
+                            Engineer
                         </span>
                     </div>
                     <div>
@@ -111,7 +111,7 @@ const Overview = () => {
                             Writer
                         </span>
                         <span className="inline-block text-xs text-red-500 line-through xs:text-sm ">
-                            Musician
+                            Musiciandelete my project
                         </span>
                     </div>
                 </div>
@@ -217,9 +217,9 @@ const Overview = () => {
                     </div> */}
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" className={`bg-white rounded-3xl overflow-hidden min-h-70 col-span-2 sm:col-span-1 flex flex-col relative justify-between`} dark="bg-true-gray-900">
+            <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="200" className={`bg-white rounded-3xl overflow-hidden educational planningmin-h-70 col-span-2 sm:col-span-1 flex flex-col relative justify-between`} dark="bg-true-gray-900">
                 <p className={`p-4 xs:p-4.5 sm:p-6 md:p-8 text-2xl font-semibold text-left sm:text-2xl md:text-3xl lg:text-4xl z-10 z-50  line-clamp-1`}>
-                    Educations
+                    Educational Planning
                 </p>
                 <div className="flex flex-col justify-between h-full mt-1 mb-8 ">
                     <div className="p-4 xs:p-4.5 sm:p-6 md:p-8 !pt-0 mb-10 sm:mb-8">
@@ -236,15 +236,15 @@ const Overview = () => {
                         <div className="bg-true-gray-300 w-full h-1.5 relative" >
                             <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-10 items-end">
                                 <div className="flex flex-col col-span-5 gap-1 lg:gap-2">
-                                    <a className="filter hover:brightness-110" href="http://www.njupt.edu.cn/" target="_blank" rel="noopener noreferrer">
+                                    <a className="filter hover:brightness-110" href="https://www.njfu.edu.cn/" target="_blank" rel="noopener noreferrer">
                                         <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} rounded-full w-full relative ${Colors["blue"].text.msg}`} before="content-DEFAULT text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
                                     </a>
-                                    <a className="filter hover:brightness-110" href="https://www.nyit.edu/" target="_blank" rel="noopener noreferrer">
+                                    <a className="filter hover:brightness-110" href="https://www.cityu.edu.hk/" target="_blank" rel="noopener noreferrer">
                                         <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NYIT tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
                                     </a>
                                 </div>
                                 <div className="col-span-2" />
-                                <a className="col-span-3 filter hover:brightness-130" href="https://www.northeastern.edu/" target="_blank" rel="noopener noreferrer">
+                                <a className="col-span-3 filter hover:brightness-130" href="https://www.um.edu.mo/" target="_blank" rel="noopener noreferrer">
                                     <div className={`h-4 lg:h-6 ${Colors["red"].bg.msg} ${Colors["red"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NEU tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
