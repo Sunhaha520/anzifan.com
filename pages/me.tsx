@@ -111,7 +111,7 @@ const Overview = () => {
                             Writer
                         </span>
                         <span className="inline-block text-xs text-red-500 line-through xs:text-sm ">
-                            Musiciandelete my project
+                            Musician
                         </span>
                     </div>
                 </div>
