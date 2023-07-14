@@ -37,10 +37,10 @@ const LocationMap = () => {
     let src
     switch (resolvedTheme) {
         case 'light':
-            src = "/static/images/map_light.png"
+            src = "/static/images/map_light.jpg"
             break
         case 'dark':
-            src = "/static/images/map_dark.png"
+            src = "/static/images/map_dark.jpg"
             break
         default:
             src = emptyImage
@@ -243,7 +243,7 @@ const Overview = () => {
                                 </div>
                                 <div className="col-span-2" />
                                 <a className="col-span-3 filter hover:brightness-130" href="https://www.cityu.edu.hk/" target="_blank" rel="noopener noreferrer">
-                                    <div className={`h-4 lg:h-6 ${Colors["red"].bg.msg} ${Colors["red"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸CityU tracking-wide font-semibold absolute -top-6 left-0" />
+                                    <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸CityU tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
                         </div>
