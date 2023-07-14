@@ -39,13 +39,13 @@ const navigations = [
     color: Colors['blue'].text.normal,
     width: 'group-hover:w-15.5',
   },
-  //{
-  //  name: 'Me',
-  //  link: '/me',
-   // icon: <MeIcon />,
-   // color: Colors['red'].text.normal,
-   // width: 'group-hover:w-6.5',
-  //},
+  {
+    name: 'Me',
+    link: '/me',
+    icon: <MeIcon />,
+    color: Colors['red'].text.normal,
+    width: 'group-hover:w-6.5',
+  },
 ]
 
 const MenuItemLink = (props: { [x: string]: any; href: any; children: any }) => {
