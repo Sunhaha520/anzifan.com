@@ -266,7 +266,7 @@ const Overview = () => {
                     </div>
                 </div>
             </div>
-            <div data-aos="fade-up" data-aos-duration="800" className={`${style} col-span-2`}>
+            {/*<div data-aos="fade-up" data-aos-duration="800" className={`${style} col-span-2`}>
                 <div className="flex items-center justify-between mb-4">
                     <h1 className={`text-2xl sm:text-3xl font-bold ${Colors["blue"].text.msg}`}>Publication</h1>
                     <a href={publication.link}>
@@ -293,7 +293,7 @@ const Overview = () => {
                         after="content-↗"
                         href={publication.website} target="_blank" rel="noopener noreferrer">{`Learn more in our website `}</a>
                 </div>
-            </div>
+            </div>*/}
         </div>
     )
 }
@@ -314,7 +314,7 @@ const Skills = () => {
 
 const ProjectHero = () => {
     const project = me.projects[0]
-    return (
+    return ({/*
         <div className="relative flex flex-col items-center justify-center py-10 overflow-hidden bg-white md:pb-5" dark="bg-true-gray-900">
             <h1 data-aos="fade-up" className={`${Colors["purple"].text.msg} text-4xl lg:text-6xl mb-15 font-bold text-center text-stroke-sm text-stroke-purple-500 uppercase text-transparent write-vertical-right  absolute right-2 top-4 md:(right-5 top-10)`}>Project</h1>
             <div data-aos="fade-up" className="mt-10 mb-4 shadow-md aspect-ratio w-15 xs:w-20 rounded-2xl" id="hero">
@@ -337,14 +337,14 @@ const ProjectHero = () => {
                     )}
                 </div>
             </div>
-        </div>
+        </div>*/}
     )
 }
 
 const Project = () => {
     const project = me.projects[1]
     return (
-        <div className="lg:mx-20">
+        {/*<div className="lg:mx-20">
             <CardLayout>
                 <div className="flex flex-col items-center justify-between md:flex-row">
                     <div className="flex flex-col justify-start h-70 md:h-120 md:m-4">
@@ -376,9 +376,9 @@ const Project = () => {
                     <p className={`text-sm font-semibold inline-block text-center px-4 py-3`}>Explore More</p>
                 </a>
             </div>
-        </div>
+        </div>*/}
     )
-}
+} 
 
 const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
     useEffect(() => {
