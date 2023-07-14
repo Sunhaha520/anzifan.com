@@ -414,11 +414,11 @@ const Me: NextPage<{ posts: Post[] }> = ({ posts }) => {
                 <Overview />
             </div>
             <ProjectHero />
-            <ListLayout>
+            {/*<ListLayout>
                 <div className="my-10">
                     <Project />
                 </div>
-            </ListLayout>
+            </ListLayout>*/}
         </>
     )
 }
