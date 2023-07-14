@@ -33,7 +33,7 @@ const Licensing = (post: { page: Post }) => {
     </>
 
     const config: any = {
-        '作者': <Link href={"/me"}><a>阿愚君</a></Link>,
+        '作者': <Link href={"/me"}><a>可乐君</a></Link>,
         '分布于': <Moment date={post.page.date} fromNow format="MMM DD, YYYY" local />,
         '更新于': <Moment date={moment(post.page.updateDate).isBefore(moment([2022, 6, 8])) ? post.page.date : post.page.updateDate} fromNow format="MMM DD, YYYY" local />,
         '许可协议': ccLicense,
