@@ -234,11 +234,11 @@ const Overview = () => {
                     </div>
                     <div className="flex flex-col h-full items-center justify-end pb-4 xs:pb-4.5 sm:pb-6 md:pb-8">
                         <div className="bg-true-gray-300 w-full h-1.5 relative" >
-                            <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-10 items-end">
+                            <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-0 items-end">
                                 <div className="flex flex-col col-span-5 gap-1 lg:gap-2">
     
                                     <a className="filter hover:brightness-110" href="https://www.njfu.edu.cn/" target="_blank" rel="noopener noreferrer">
-                                        <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NJFU tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
+                                        <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} ${Colors["blue"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NJFU tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
                                     </a>
                                 </div>
                                 <div className="col-span-2" />
