@@ -63,9 +63,9 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <title>阿愚君的个人主页</title>
         <meta name="description" content="阿愚君の小站" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/color.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/color.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/color.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </Head>
       <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
