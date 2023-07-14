@@ -129,7 +129,7 @@ const Overview = () => {
             <div data-aos="fade-up" data-aos-duration="800" data-aos-delay="400" className={`${style} overflow-hidden !justify-end relative`}>
                 {/* p-4 xs:p-4.5 sm:p-6 md:p-8  */}
                 <p className="z-10 py-2 px-4 xs:px-4.5 sm:px-3 md:px-6 -m-4 xs:-m-4.5 sm:-m-6 md:-m-8 text-xs sm:text-lg font-semibold opacity-90 bg-gray-200 md:text-xl" dark="bg-gray-700">
-                    <span className="text-gray-600" dark="text-gray-400">Located in</span> Seattle, WA
+                    <span className="text-gray-600" dark="text-gray-400">Located in</span> Lian Yungang, CN
                 </p>
                 <LocationMap />
             </div>
@@ -236,31 +236,29 @@ const Overview = () => {
                         <div className="bg-true-gray-300 w-full h-1.5 relative" >
                             <div className="absolute px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 w-full -top-6 lg:-top-10 items-end">
                                 <div className="flex flex-col col-span-5 gap-1 lg:gap-2">
+    
                                     <a className="filter hover:brightness-110" href="https://www.njfu.edu.cn/" target="_blank" rel="noopener noreferrer">
-                                        <div className={`h-4 lg:h-6 ${Colors["blue"].bg.msg} rounded-full w-full relative ${Colors["blue"].text.msg}`} before="content-DEFAULT text-transparent absolute w-1/4 rounded-r-full h-full bg-blue-100 top-0 right-0" after="absolute content-🇨🇳NJUPT tracking-wide font-semibold absolute -top-6 left-2" />
-                                    </a>
-                                    <a className="filter hover:brightness-110" href="https://www.cityu.edu.hk/" target="_blank" rel="noopener noreferrer">
-                                        <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NYIT tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
+                                        <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NJFU tracking-wide font-semibold absolute top-5 lg:top-6 left-2" />
                                     </a>
                                 </div>
                                 <div className="col-span-2" />
-                                <a className="col-span-3 filter hover:brightness-130" href="https://www.um.edu.mo/" target="_blank" rel="noopener noreferrer">
-                                    <div className={`h-4 lg:h-6 ${Colors["red"].bg.msg} ${Colors["red"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸NEU tracking-wide font-semibold absolute -top-6 left-0" />
+                                <a className="col-span-3 filter hover:brightness-130" href="https://www.cityu.edu.hk/" target="_blank" rel="noopener noreferrer">
+                                    <div className={`h-4 lg:h-6 ${Colors["red"].bg.msg} ${Colors["red"].text.msg} rounded-full w-full relative`} after="absolute content-🇺🇸CityU tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
                         </div>
                         <div className="w-full px-4 xs:px-4.5 sm:px-6 md:px-8 grid grid-cols-10 text-true-gray-300">
                             <div className="flex flex-col items-stretch justify-center col-span-4">
-                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 relative rounded-full" after="content-2016 absolute -bottom-6 -left-4" />
+                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 relative rounded-full" after="content-2019 absolute -bottom-6 -left-4" />
                             </div>
                             <div className="flex flex-col items-end justify-center">
-                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2020 absolute -bottom-6 -left-4" />
+                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2023 absolute -bottom-6 -left-4" />
                             </div>
                             <div className="flex flex-col items-end justify-center col-span-2">
-                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2021 absolute -bottom-6 -left-4" />
+                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2024 absolute -bottom-6 -left-4" />
                             </div>
                             <div className="flex flex-col items-end justify-center col-span-3">
-                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2022 absolute -bottom-6 -left-6 sm:-left-4" />
+                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2025 absolute -bottom-6 -left-6 sm:-left-4" />
                             </div>
                         </div>
                     </div>
