@@ -37,10 +37,10 @@ const LocationMap = () => {
     let src
     switch (resolvedTheme) {
         case 'light':
-            src = "/static/images/map_light.jpg"
+            src = "/static/images/map_light.webp"
             break
         case 'dark':
-            src = "/static/images/map_dark.jpg"
+            src = "/static/images/map_dark.webp"
             break
         default:
             src = emptyImage
