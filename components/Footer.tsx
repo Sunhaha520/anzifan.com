@@ -58,7 +58,7 @@ const Footer = () => {
                                     {`Copyright © 2020-${thisYear} `}
                                     <Link href={"/me"}>
                                         <a className="text-true-gray-600 hover:underline" dark="text-true-gray-400">
-                                            阿愚君
+                                            可乐君
                                         </a>
                                     </Link>
                                 </span>                                
