@@ -314,7 +314,7 @@ const Skills = () => {
 
 const ProjectHero = () => {
     const project = me.projects[0]
-    return ({/*
+    return (
         <div className="relative flex flex-col items-center justify-center py-10 overflow-hidden bg-white md:pb-5" dark="bg-true-gray-900">
             <h1 data-aos="fade-up" className={`${Colors["purple"].text.msg} text-4xl lg:text-6xl mb-15 font-bold text-center text-stroke-sm text-stroke-purple-500 uppercase text-transparent write-vertical-right  absolute right-2 top-4 md:(right-5 top-10)`}>Project</h1>
             <div data-aos="fade-up" className="mt-10 mb-4 shadow-md aspect-ratio w-15 xs:w-20 rounded-2xl" id="hero">
@@ -337,7 +337,7 @@ const ProjectHero = () => {
                     )}
                 </div>
             </div>
-        </div>*/}
+        </div>
     )
 }
 
