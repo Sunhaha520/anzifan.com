@@ -28,7 +28,7 @@ const Home: NextPage<{ posts: Post[] }> = ({ posts }) => {
   const mainPosts = posts.slice(0, 17)
   const router = useRouter();
   const { locale } = router;
-  const description = "阿愚君de个人小站"
+  const description = "可乐君de个人小站"
   const featuredImage = {
     url: `${me.site}/static/images/og.png`,
     alt: description,
