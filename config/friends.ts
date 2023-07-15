@@ -5,6 +5,11 @@ export type FriendType = {
 }
 
 export const friends: FriendType[] = [
+    {
+    url: 'https://mo.xiaoayu.ren',
+    name: '阿宇の小站',
+    img: 'https://cola.xiaoayu.ren/_next/image?url=%2Fstatic%2Fimages%2Fportrait.png&w=2048&q=75',
+  },
   {
     url: 'https://www.mikuchan.top',
     name: '团子的航海日记',
