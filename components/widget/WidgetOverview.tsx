@@ -288,8 +288,8 @@ const OverviewUv = () => {
 
 const OverviewPvAll = () => {
     const { data: pvAllData, error: pvAllError } = useSWRImmutable('/api/page-views/all', fetcher)
-    if (pvAllError) return <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>25,223 次访问</p>
-    if (!pvAllData) return <p className={`${Colors["blue"]?.text.normal} animate-pulse line-clamp-1`}>- 次访问</p>
+    if (!pvAllError) return <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>25,223 次访问</p>
+    if (pvAllData) return <p className={`${Colors["blue"]?.text.normal} animate-pulse line-clamp-1`}>- 次访问</p>
     const pvAmount = pvAllData["pageViews"] || "-"
 
     return (
