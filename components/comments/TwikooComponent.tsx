@@ -8,7 +8,7 @@ const TwikooComponent: FC = () => {
         cloudbase
         const twikoo = require('twikoo/dist/twikoo.min')
         twikoo.init({
-            envId: 'https://talkk.zeabur.app/',
+            envId: 'https://talk.xiaoayu.ren/',
             el: '#twikoo',
         })
     }
