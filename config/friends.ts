@@ -8,7 +8,7 @@ export const friends: FriendType[] = [
     {
     url: 'https://mo.xiaoayu.ren',
     name: '阿宇の小站',
-    img: 'https://cdn.staticaly.com/gh/Sunhaha520/picx-images-hosting@master/portrait.5n7ee6bgk7k0.webp',
+    img: 'https://cdn.jsdelivr.net/gh/Sunhaha520/picx-images-hosting@master/portrait.5n7ee6bgk7k0.webp',
   },
   {
     url: 'https://www.mikuchan.top',
