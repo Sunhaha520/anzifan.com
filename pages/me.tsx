@@ -242,8 +242,8 @@ const Overview = () => {
                                     </a>
                                 </div>
                                 <div className="col-span-2" />
-                                <a className="col-span-3 filter hover:brightness-130" href="https://www.cityu.edu.hk/" target="_blank" rel="noopener noreferrer">
-                                    <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇭🇰CityU tracking-wide font-semibold absolute -top-6 left-0" />
+                                <a className="col-span-3 filter hover:brightness-130" href="https://www.um.edu.mo" target="_blank" rel="noopener noreferrer">
+                                    <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-moUM tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
                         </div>
@@ -258,7 +258,7 @@ const Overview = () => {
                                 <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2024 absolute -bottom-6 -left-4" />
                             </div>
                             <div className="flex flex-col items-end justify-center col-span-3">
-                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2025 absolute -bottom-6 -left-6 sm:-left-4" />
+                                <div className="mt-1 h-10 w-0.5 bg-true-gray-300 rounded-full relative" after="content-2026 absolute -bottom-6 -left-6 sm:-left-4" />
                             </div>
                         </div>
                     </div>
