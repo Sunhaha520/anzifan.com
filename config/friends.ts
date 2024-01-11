@@ -13,7 +13,7 @@ export const friends: FriendType[] = [
   {
     url: 'https://blog.xiaoayu.ren',
     name: '奶昔小站',
-    img: 'https://cdn.statically.io/gh/Sunhaha520/picx-images-hosting@master/20240111/imgbin_despicable-me-minion-rush-computer-icons-minions-png.3j2k0it4dsg0.webp',
+    img: 'https://cdn.jsdelivr.net/gh/Sunhaha520/picx-images-hosting@master/20240111/imgbin_despicable-me-minion-rush-computer-icons-minions-png.3j2k0it4dsg0.webp',
   },
   {
     url: 'https://www.mikuchan.top',
