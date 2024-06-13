@@ -73,7 +73,7 @@ const Overview = () => {
                     Hey there 👋
                 </div>
                 <div className="text-lg font-semibold xs:text-2xl sm:text-3xl md:text-4xl whitespace-nowrap">
-                    {`I'm Zhenyu Sun `}
+                    {`I'm Derek Sun `}
                     {/* <span className="text-sm">(a guy)</span> */}
                 </div>
                 {/* </div> */}
@@ -243,7 +243,7 @@ const Overview = () => {
                                 </div>
                                 <div className="col-span-2" />
                                 <a className="col-span-3 filter hover:brightness-130" href="https://www.um.edu.mo" target="_blank" rel="noopener noreferrer">
-                                    <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-moUM tracking-wide font-semibold absolute -top-6 left-0" />
+                                    <div className={`h-4 lg:h-6 ${Colors["yellow"].bg.msg} ${Colors["yellow"].text.msg} rounded-full w-full relative`} after="absolute content-🇲🇴UM tracking-wide font-semibold absolute -top-6 left-0" />
                                 </a>
                             </div>
                         </div>
