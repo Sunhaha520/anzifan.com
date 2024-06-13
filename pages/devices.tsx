@@ -12,17 +12,17 @@ interface DeviceType {
 const devices: DeviceType[] = [
     {
         name: "MacBook Pro",
-        img: "https://www.xiaoayu.ren/goods/xiaomi12x.webp",
+        img: "/public/devices/xiaomi12x.webp",
         description: "一台强大的笔记本电脑，适合开发和设计工作。"
     },
     {
         name: "iPhone 12",
-        img: "https://www.xiaoayu.ren/goods/songxia.webp",
+        img: "/public/devices/songxia.webp",
         description: "一款功能强大的智能手机，拍照和性能都很出色。"
     },
     {
         name: "Apple Watch",
-        img: "https://www.xiaoayu.ren/goods/airpod3.webp",
+        img: "/public/devices/rongya.webp",
         description: "一款方便的智能手表，可以帮助跟踪健康和通知。"
     },
     // 添加更多设备信息
@@ -30,12 +30,12 @@ const devices: DeviceType[] = [
 
 const DeviceCard: FC<DeviceType> = ({ name, img, description }) => {
     return (
-        <div className="flex items-center justify-center transition duration-200 ease-in-out transform bg-white shadow-lg h-55 lg:h-58 rounded-3xl hover:scale-105 dark:bg-true-gray-900">
+        <div className="transition duration-200 ease-in-out transform bg-white shadow-lg rounded-3xl hover:scale-105 dark:bg-true-gray-900">
+            <div className="relative w-full h-40 bg-true-gray-200 rounded-t-3xl overflow-hidden dark:bg-true-gray-600">
+                <Image layout='fill' objectFit="cover" src={img} alt={name} className="object-cover" />
+            </div>
             <div className="flex flex-col items-center justify-between h-full p-5">
-                <div className="w-20 h-20 bg-true-gray-200 relative overflow-hidden rounded-md dark:bg-true-gray-600">
-                    <Image layout='fill' objectFit="cover" src={img} alt={name} className="object-cover" />
-                </div>
-                <div className="pb-2 text-center">
+                <div className="text-center">
                     <p className="leading-4 dark:text-white">{name}</p>
                     <div className="mt-1 text-sm text-true-gray-400 dark:text-true-gray-300">
                         {description}
