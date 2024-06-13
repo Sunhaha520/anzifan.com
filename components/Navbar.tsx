@@ -44,7 +44,7 @@ const navigations = [
     name: 'Devices',
     link: '/devices',
     icon: <DeviceIcon />,
-    color: Colors['#36ab60'].text.normal,
+    color: Colors['green'].text.normal,
     width: 'group-hover:w-15.5',
   },
   {
