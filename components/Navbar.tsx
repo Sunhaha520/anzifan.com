@@ -20,39 +20,39 @@ import PostToc from './PostToc';
 
 const navigations = [
   {
-    name: 'Tags',
+    name: '标签',
     link: '/tags',
     icon: <TagsIcon />,
     color: Colors['pink'].text.normal,
     width: 'group-hover:w-9.5',
   },
   {
-    name: 'Categories',
+    name: '分类',
     link: '/categories',
     icon: <CategoriesIcon />,
     color: Colors['orange'].text.normal,
-    width: 'group-hover:w-21.5',
+    width: 'group-hover:w-9.5',
   },
   {
-    name: 'Friends',
+    name: '朋友们',
     link: '/friends',
     icon: <FriendsIcon />,
     color: Colors['blue'].text.normal,
     width: 'group-hover:w-15.5',
   },
   {
-    name: 'Devices',
+    name: '装备',
     link: '/devices',
     icon: <DeviceIcon />,
     color: Colors['green'].text.normal,
-    width: 'group-hover:w-15.5',
+    width: 'group-hover:w-9.5',
   },
   {
-    name: 'Me',
+    name: '关于我',
     link: '/me',
     icon: <MeIcon />,
     color: Colors['red'].text.normal,
-    width: 'group-hover:w-6.5',
+    width: 'group-hover:w-15.5',
   },
 ]
 
