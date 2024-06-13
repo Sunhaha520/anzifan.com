@@ -12,6 +12,7 @@ import MeIcon from '../assets/me.svg'
 import TocIcon from '../assets/toc.svg'
 import MenuIcon from '../assets/menu.svg'
 import TocFillIcon from '../assets/toc_fill.svg'
+import DeviceIcon from '../assets/device.svg'
 
 import { Colors } from '../lib/colors';
 import { useRouter } from 'next/router';
@@ -38,6 +39,13 @@ const navigations = [
     icon: <FriendsIcon />,
     color: Colors['blue'].text.normal,
     width: 'group-hover:w-15.5',
+  },
+  {
+    name: 'Devices',
+    link: '/devices',
+    icon: <DeviceIcon />,
+    color: Colors['#36ab60'].text.normal,
+    width: 'group-hover:w-6.5',
   },
   {
     name: 'Me',
