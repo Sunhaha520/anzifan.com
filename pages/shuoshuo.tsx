@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import ListLayout from "../components/layout/ListLayout";
 import { FC } from "react";
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
 import fs from 'fs';
 import path from 'path';
 
