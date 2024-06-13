@@ -12,17 +12,17 @@ interface DeviceType {
 const devices: DeviceType[] = [
     {
         name: "MacBook Pro",
-        img: "/public/devices/xiaomi12x.webp",
+        img: "https://cdn.dribbble.com/userupload/15091244/file/original-02cd3874e0498a86ab2f7e69d16805b1.webp",
         description: "一台强大的笔记本电脑，适合开发和设计工作。"
     },
     {
         name: "iPhone 12",
-        img: "/public/devices/songxia.webp",
+        img: "https://cdn.dribbble.com/userupload/15091241/file/original-85eba33649b2de99236f1972d65fbaa2.webp",
         description: "一款功能强大的智能手机，拍照和性能都很出色。"
     },
     {
         name: "Apple Watch",
-        img: "/public/devices/rongya.webp",
+        img: "https://cdn.dribbble.com/userupload/15091243/file/original-966eb4bc3cfa459eb393ca2f42966168.webp",
         description: "一款方便的智能手表，可以帮助跟踪健康和通知。"
     },
     // 添加更多设备信息
