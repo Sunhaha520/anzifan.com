@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Nextdotjs, Notion, Windicss, Vercel, Icon } from '@icons-pack/react-simple-icons'
 import ThemeSwitch from "./ThemeSwitch";
 
-
 const Footer = () => {
     const thisYear = new Date().getFullYear();
     const tools = [{
@@ -19,9 +18,8 @@ const Footer = () => {
     }, {
         icon: Vercel,
         url: "https://vercel.com"
-    }
+    }];
 
-    ]
     return (
         <>
             <footer className="relative bg-true-gray-100" dark="bg-true-gray-800">
@@ -29,7 +27,7 @@ const Footer = () => {
                     <nav className="py-4 flex justify-between items-center">
                         <Link href='/'>
                             <a>
-                                <Image className="" src="/static/images/favicon.png" alt="logo" width="20px" height="20px" />
+                                <Image src="/static/images/favicon.png" alt="logo" width={20} height={20} />
                             </a>
                         </Link>
                         <ThemeSwitch />
@@ -73,7 +71,7 @@ const Footer = () => {
                 </div>
             </footer>
         </>
-    )
+    );
 }
 
-export default Footer
+export default Footer;
