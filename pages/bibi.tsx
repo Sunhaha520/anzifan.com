@@ -1,11 +1,13 @@
 import { NextPage } from "next";
 import ListLayout from "../components/layout/ListLayout";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/zh-cn';
 import relativeTime from "dayjs/plugin/relativeTime";
 import useSWR from 'swr';
 import Image from 'next/image';
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css';
 import { Colors } from "../lib/colors";
 
 dayjs.locale('zh-cn');
@@ -28,6 +30,10 @@ interface Memos {
 const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 const MemoCard: FC<Memos> = (memo) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [photoIndex, setPhotoIndex] = useState(0);
+  const images = memo.resourceList.filter(resource => resource.type.startsWith('image/')).map(resource => resource.externalLink);
+
   return (
     <div className="flex flex-col items-start p-4 transition duration-200 ease-in-out transform bg-white shadow-lg rounded-3xl hover:scale-105 dark:bg-true-gray-900">
       <div className="flex items-center mb-4">
@@ -40,13 +46,21 @@ const MemoCard: FC<Memos> = (memo) => {
         </div>
       </div>
       <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
-      {memo.resourceList && memo.resourceList.map((resource) => (
-        resource.type.startsWith('image/') ? (
-          <div key={resource.externalLink} className="mt-4">
-            <Image src={resource.externalLink} alt="Memo Image" width={600} height={400} className="rounded-lg" />
-          </div>
-        ) : null
+      {images.map((image, index) => (
+        <div key={image} className="mt-4 w-full cursor-pointer" onClick={() => { setPhotoIndex(index); setIsOpen(true); }}>
+          <Image src={image} alt="Memo Image" layout="responsive" width={600} height={400} className="rounded-lg" />
+        </div>
       ))}
+      {isOpen && (
+        <Lightbox
+          mainSrc={images[photoIndex]}
+          nextSrc={images[(photoIndex + 1) % images.length]}
+          prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+          onCloseRequest={() => setIsOpen(false)}
+          onMovePrevRequest={() => setPhotoIndex((photoIndex + images.length - 1) % images.length)}
+          onMoveNextRequest={() => setPhotoIndex((photoIndex + 1) % images.length)}
+        />
+      )}
     </div>
   );
 };
