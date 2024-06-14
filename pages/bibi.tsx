@@ -48,7 +48,7 @@ const MemoCard: FC<Memos> = (memo) => {
       <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
       {images.map((image, index) => (
         <div key={image} className="mt-4 w-full cursor-pointer" onClick={() => { setPhotoIndex(index); setIsOpen(true); }}>
-          <Image src={image} alt="Memo Image" layout="responsive" width={600} height={400} className="rounded-lg" />
+          <Image src={image} alt="Memo Image" layout="responsive" width={160} height={90} className="rounded-lg" />
         </div>
       ))}
       {isOpen && (
