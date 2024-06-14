@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from "next";
-import { ReactElement, ReactNode, useEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { BlogLayoutPure } from "../components/layout/BlogLayout";
 import ListLayout from "../components/layout/ListLayout";
 import dayjs from "dayjs";
@@ -13,9 +13,6 @@ interface Memos {
   id: string;
   content: string;
   createdTs: number;
-  creatorName: string;
-  creatorUsername: string;
-  resourceList: any[];
 }
 
 const fetchMemos = async () => {
@@ -38,117 +35,87 @@ const Bibi: NextPage = () => {
   return (
     <ListLayout>
       <h1 className="mb-4 text-2xl font-bold md:text-3xl lg:mb-8">说说✨</h1>
-      <div className="timeline">
+      <div className="memos-list">
         {memos.map((memo) => (
-          <div key={memo.id} className="timeline-item">
-            <div className="timeline-item-content">
-              <span className="tag">{memo.creatorName}</span>
-              <time>{dayjs.unix(memo.createdTs).fromNow()}</time>
+          <div key={memo.id} className="memo-card">
+            <div className="memo-header">
+              <img src="/path-to-avatar.jpg" alt="可乐君" className="avatar" />
+              <div className="memo-info">
+                <span className="nickname">可乐君</span>
+                <time className="timestamp">{dayjs.unix(memo.createdTs).fromNow()}</time>
+              </div>
+            </div>
+            <div className="memo-content">
               <p dangerouslySetInnerHTML={{ __html: memo.content }}></p>
-              <span className="circle" />
             </div>
           </div>
         ))}
       </div>
       <style jsx>{`
-        .timeline {
-          position: relative;
-          padding: 1rem 0;
-          list-style: none;
+        .memos-list {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
         }
 
-        .timeline:before {
-          content: '';
-          position: absolute;
-          left: 50%;
-          top: 0;
-          bottom: 0;
-          width: 2px;
-          margin-left: -1px;
-          background: var(--timeline-line-color, #ccc);
-        }
-
-        .timeline-item {
-          position: relative;
-          margin: 1rem 0;
-        }
-
-        .timeline-item-content {
-          position: relative;
-          margin-left: calc(50% + 2rem);
-          padding: 1rem;
-          background: var(--timeline-item-bg, #f9f9f9);
+        .memo-card {
+          background: var(--card-bg, #f9f9f9);
           border-radius: 8px;
+          padding: 1rem;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          display: flex;
+          flex-direction: column;
           transition: background 0.3s ease;
         }
 
-        .timeline-item-content:hover {
-          background: var(--timeline-item-hover-bg, #e9e9e9);
+        .memo-card:hover {
+          background: var(--card-hover-bg, #e9e9e9);
         }
 
-        .timeline-item-content time {
-          font-size: 0.85rem;
-          color: var(--timeline-time-color, #888);
-        }
-
-        .timeline-item-content .tag {
-          display: inline-block;
+        .memo-header {
+          display: flex;
+          align-items: center;
           margin-bottom: 0.5rem;
-          font-weight: bold;
-          background: var(--timeline-tag-bg, #0070f3);
-          color: #fff;
-          padding: 0.25rem 0.5rem;
-          border-radius: 4px;
         }
 
-        .timeline-item-content .circle {
-          position: absolute;
-          top: 1rem;
-          left: -2rem;
-          width: 1rem;
-          height: 1rem;
-          background: var(--timeline-circle-bg, #0070f3);
+        .avatar {
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
+          margin-right: 0.5rem;
+        }
+
+        .memo-info {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .nickname {
+          font-weight: bold;
+          margin-bottom: 0.25rem;
+        }
+
+        .timestamp {
+          font-size: 0.85rem;
+          color: var(--timestamp-color, #888);
+        }
+
+        .memo-content {
+          margin-top: 0.5rem;
         }
 
         @media (prefers-color-scheme: dark) {
-          .timeline:before {
-            background: #444;
-          }
-
-          .timeline-item-content {
+          .memo-card {
             background: #333;
             color: #ddd;
           }
 
-          .timeline-item-content:hover {
+          .memo-card:hover {
             background: #444;
           }
 
-          .timeline-item-content time {
+          .timestamp {
             color: #aaa;
-          }
-
-          .timeline-item-content .tag {
-            background: #0070f3;
-          }
-
-          .timeline-item-content .circle {
-            background: #0070f3;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .timeline:before {
-            left: 2rem;
-          }
-
-          .timeline-item-content {
-            margin-left: 4rem;
-          }
-
-          .timeline-item-content .circle {
-            left: -1rem;
           }
         }
       `}</style>
@@ -158,7 +125,7 @@ const Bibi: NextPage = () => {
 
 // 定义扩展的 NextPage 类型
 type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
-  getLayout?: (page: ReactElement) => ReactNode;
+  getLayout?: (page: ReactElement) => ReactElement;
 };
 
 export const getStaticProps: GetStaticProps = async () => {
