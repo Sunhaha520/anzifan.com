@@ -42,8 +42,8 @@ const MemoCard: FC<Memos> = (memo) => {
       <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
       {memo.resourceList && memo.resourceList.map((resource) => (
         resource.type.startsWith('image/') ? (
-          <div key={resource.externalLink} className="mt-4">
-            <Image src={resource.externalLink} alt="Memo Image" width={600} height={400} className="rounded-lg" />
+          <div key={resource.externalLink} className="mt-4 w-full">
+            <Image src={resource.externalLink} alt="Memo Image" layout="responsive" width={600} height={400} className="rounded-lg" />
           </div>
         ) : null
       ))}
