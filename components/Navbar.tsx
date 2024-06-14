@@ -13,6 +13,7 @@ import TocIcon from '../assets/toc.svg'
 import MenuIcon from '../assets/menu.svg'
 import TocFillIcon from '../assets/toc_fill.svg'
 import DeviceIcon from '../assets/device.svg'
+import TalkIcon from '../assets/talk.svg'
 
 import { Colors } from '../lib/colors';
 import { useRouter } from 'next/router';
@@ -45,6 +46,13 @@ const navigations = [
     link: '/devices',
     icon: <DeviceIcon />,
     color: Colors['green'].text.normal,
+    width: 'group-hover:w-9.5',
+  },
+  {
+    name: '说说',
+    link: '/bibi',
+    icon: <TalkIcon />,
+    color: Colors['yellow'].text.normal,
     width: 'group-hover:w-9.5',
   },
   {
