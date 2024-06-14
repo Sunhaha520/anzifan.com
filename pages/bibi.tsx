@@ -11,10 +11,18 @@ import { Colors } from "../lib/colors";
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
 
+interface Resource {
+  createdTs: number;
+  externalLink: string;
+  type: string;
+  size: number;
+}
+
 interface Memos {
   id: string;
   content: string;
   createdTs: number;
+  resourceList: Resource[];
 }
 
 const fetcher = (url: string) => fetch(url).then(res => res.json());
@@ -32,6 +40,13 @@ const MemoCard: FC<Memos> = (memo) => {
         </div>
       </div>
       <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
+      {memo.resourceList && memo.resourceList.map((resource) => (
+        resource.type.startsWith('image/') ? (
+          <div key={resource.externalLink} className="mt-4">
+            <Image src={resource.externalLink} alt="Memo Image" width={600} height={400} className="rounded-lg" />
+          </div>
+        ) : null
+      ))}
     </div>
   );
 };
