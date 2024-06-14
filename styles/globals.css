@@ -36,3 +36,27 @@ img {
 .dark .tk-expand {
   background-color: rgb(23, 23, 23) !important;
 }
+
+element.style {
+    box-sizing: border-box;
+    display: block;
+    width: initial;
+    height: initial;
+    background: none;
+    opacity: 1;
+    border: 0px;
+    margin: 0px;
+    padding: 20% 50% 5%;
+    position: absolute;
+    inset: 0px;
+    box-sizing: border-box;
+    padding: 0px;
+    border: none;
+    display: block;
+    width: 0px;
+    height: 0px;
+    min-width: 50%;
+    max-width: 50%;
+    min-height: 100%;
+    max-height: 100%;
+}
