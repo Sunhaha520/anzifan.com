@@ -47,8 +47,8 @@ const MemoCard: FC<Memos> = (memo) => {
       <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
       <div className="grid grid-cols-3 gap-4 mt-4 w-full">
         {images.map((image, index) => (
-          <div key={image} className="relative cursor-pointer" onClick={() => { setPhotoIndex(index); setIsOpen(true); }}>
-            <div className="overflow-hidden w-full h-32">
+          <div key={image} className="relative w-full pb-1/1 cursor-pointer" onClick={() => { setPhotoIndex(index); setIsOpen(true); }}>
+            <div className="absolute inset-0 overflow-hidden">
               <Image src={image} alt="Memo Image" layout="fill" objectFit="cover" className="rounded-lg" />
             </div>
           </div>
