@@ -48,7 +48,8 @@
     "swr": "^1.1.2",
     "transliteration": "^2.2.0",
     "twikoo": "^1.5.11",
-    "unfurl.js": "^5.6.2"
+    "unfurl.js": "^5.6.2",
+    "dayjs": "^1.10.7"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^12.1.6",
@@ -57,6 +58,7 @@
     "@types/probe-image-size": "^7.0.1",
     "@types/react": "17.0.38",
     "@types/react-syntax-highlighter": "^13.5.2",
+    "@types/dayjs": "^1.10.7",
     "cross-env": "^7.0.3",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.7",
