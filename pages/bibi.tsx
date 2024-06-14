@@ -1,12 +1,13 @@
 import { NextPage } from "next";
 import ListLayout from "../components/layout/ListLayout";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/zh-cn';
 import relativeTime from "dayjs/plugin/relativeTime";
 import useSWR from 'swr';
 import Image from 'next/image';
-import { Colors } from "../lib/colors";
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
@@ -31,7 +32,11 @@ const MemoCard: FC<Memos> = (memo) => {
           </div>
         </div>
       </div>
-      <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
+      <div className="text-true-gray-800 dark:text-true-gray-300">
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+          {memo.content}
+        </ReactMarkdown>
+      </div>
     </div>
   );
 };
@@ -45,7 +50,7 @@ const Bibi: NextPage = () => {
   return (
     <ListLayout>
       <h1 className="mb-4 text-2xl font-bold md:text-3xl lg:mb-8">说说✨</h1>
-      <div className="space-y-4">
+      <div className="space-y-4 mb-8">
         {data.map((memo: Memos) => <MemoCard key={memo.id} {...memo} />)}
       </div>
     </ListLayout>
