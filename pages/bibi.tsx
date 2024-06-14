@@ -8,7 +8,6 @@ import useSWR from 'swr';
 import Image from 'next/image';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
-import { Colors } from "../lib/colors";
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
@@ -46,11 +45,15 @@ const MemoCard: FC<Memos> = (memo) => {
         </div>
       </div>
       <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
-      {images.map((image, index) => (
-        <div key={image} className="mt-4 w-full cursor-pointer" onClick={() => { setPhotoIndex(index); setIsOpen(true); }}>
-          <Image src={image} alt="Memo Image" layout="responsive" width={160} height={90} className="rounded-lg" />
-        </div>
-      ))}
+      <div className="grid grid-cols-3 gap-4 mt-4 w-full">
+        {images.map((image, index) => (
+          <div key={image} className="relative cursor-pointer" onClick={() => { setPhotoIndex(index); setIsOpen(true); }}>
+            <div className="overflow-hidden w-full h-32">
+              <Image src={image} alt="Memo Image" layout="fill" objectFit="cover" className="rounded-lg" />
+            </div>
+          </div>
+        ))}
+      </div>
       {isOpen && (
         <Lightbox
           mainSrc={images[photoIndex]}
