@@ -1,13 +1,12 @@
 import { NextPage } from "next";
 import ListLayout from "../components/layout/ListLayout";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import 'dayjs/locale/zh-cn';
 import relativeTime from "dayjs/plugin/relativeTime";
 import useSWR from 'swr';
 import Image from 'next/image';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
+import { Colors } from "../lib/colors";
 
 dayjs.locale('zh-cn');
 dayjs.extend(relativeTime);
@@ -32,11 +31,7 @@ const MemoCard: FC<Memos> = (memo) => {
           </div>
         </div>
       </div>
-      <div className="text-true-gray-800 dark:text-true-gray-300">
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {memo.content}
-        </ReactMarkdown>
-      </div>
+      <div className="text-true-gray-800 dark:text-true-gray-300" dangerouslySetInnerHTML={{ __html: memo.content }}></div>
     </div>
   );
 };
