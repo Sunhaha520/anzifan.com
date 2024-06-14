@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Nextdotjs, Notion, Windicss, Vercel, Icon } from '@icons-pack/react-simple-icons'
 import ThemeSwitch from "./ThemeSwitch";
 
+
 const Footer = () => {
     const thisYear = new Date().getFullYear();
     const tools = [{
@@ -18,8 +19,9 @@ const Footer = () => {
     }, {
         icon: Vercel,
         url: "https://vercel.com"
-    }];
+    }
 
+    ]
     return (
         <>
             <footer className="relative bg-true-gray-100" dark="bg-true-gray-800">
@@ -27,7 +29,7 @@ const Footer = () => {
                     <nav className="py-4 flex justify-between items-center">
                         <Link href='/'>
                             <a>
-                                <Image src="/static/images/favicon.png" alt="logo" width={20} height={20} />
+                                <Image className="" src="/static/images/favicon.png" alt="logo" width="20px" height="20px" />
                             </a>
                         </Link>
                         <ThemeSwitch />
@@ -47,7 +49,7 @@ const Footer = () => {
                                 <p className="group">Design & Build with <span className="group-hover:text-red-400 transition-colors duration-500 ease-in-out">❤</span> by <a className="text-true-gray-600 hover:underline" href="https://github.com/MannyCooper/anzifan.com" target="_blank" rel="noopener noreferrer" dark="text-true-gray-400">MannyCooper</a></p>
                             </div>
                             <p className="flex flex-col items-end">
-                                <a className="hover:underline" href="https://anzifan-old.vercel.app" target="_blank" rel="noopener noreferrer"></a>
+                                <a className="hover:underline" href="https://web.xiaoayu.ren" target="_blank" rel="noopener noreferrer">Old Blog</a>
                             </p>
                         </div>
                         <div className="text-xs flex justify-between">
@@ -64,14 +66,14 @@ const Footer = () => {
                             <span><a className="text-true-gray-600 hover:underline" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener noreferrer" dark="text-true-gray-400">CC BY-NC-SA 4.0</a></span>
                         </div>
                         <p className="space-x-1 md:space-x-2 text-[10px] mt-2 text-true-gray-300">
-                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">苏ICP备 2020111837号</a></span>
-                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32010202011188" rel="noopener noreferrer" target="_blank">苏公网安备 32010202011188 号</a></span>
+                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://beian.miit.gov.cn/" rel="noopener noreferrer" target="_blank">苏ICP备 2020060340 号</a></span>
+                                    <span><a className="hover:underline hover:text-true-gray-400" dark="text-true-gray-700 hover:text-true-gray-400" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32011202000528" rel="noopener noreferrer" target="_blank">苏公网安备 32011202000528 号</a></span>
                                 </p>
                     </section>
                 </div>
             </footer>
         </>
-    );
+    )
 }
 
-export default Footer;
+export default Footer
