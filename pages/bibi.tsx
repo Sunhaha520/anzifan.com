@@ -1,5 +1,5 @@
 import { GetStaticProps, NextPage } from "next";
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, ReactNode, useEffect, useState } from "react";
 import { BlogLayoutPure } from "../components/layout/BlogLayout";
 import ListLayout from "../components/layout/ListLayout";
 import dayjs from "dayjs";
@@ -19,7 +19,7 @@ interface Memos {
 }
 
 const fetchMemos = async () => {
-  const response = await fetch('https://tgapi.xiaoayu.eu.org/?tag=SFCN&limit=10%20type:memos');
+  const response = await fetch('https://tgapi.xiaoayu.eu.org/?tag=SFCN&limit=10&type=memos');
   const data: Memos[] = await response.json();
   return data;
 };
@@ -156,6 +156,11 @@ const Bibi: NextPage = () => {
   );
 };
 
+// 定义扩展的 NextPage 类型
+type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode;
+};
+
 export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {},
@@ -163,7 +168,8 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-(Bibi as NextPage).getLayout = function getLayout(page: ReactElement) {
+// 使用扩展类型
+(Bibi as NextPageWithLayout).getLayout = function getLayout(page: ReactElement) {
   return (
     <BlogLayoutPure>
       {page}
