@@ -2,8 +2,6 @@ import Link from 'next/link';
 import { FC, Fragment, useState, useEffect } from 'react';
 import { Menu, Transition } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { classNames } from '../lib/util'; // 需要添加classNames函数
-import PostToc from './PostToc';
 import TagsIcon from '../assets/tags.svg';
 import CategoriesIcon from '../assets/categories.svg';
 import FriendsIcon from '../assets/friends.svg';
@@ -149,7 +147,7 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
       </div>
       <Transition
         show={isFolded}
-        as="div"
+        as={Fragment}
         enter="ease-out duration-500"
         enterFrom="opacity-0"
         enterTo="opacity-100"
