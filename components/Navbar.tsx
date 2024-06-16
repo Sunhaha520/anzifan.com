@@ -71,16 +71,18 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
   const path = useRouter().asPath
   const isPost = path.startsWith('/post/')
   return (
-    <header className="sticky top-0 z-50 font-bold bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg backdrop-saturate-200 border-b-[0.5px] border-b-true-gray-100 dark:bg-true-gray-900/70 dark:border-b-true-gray-800" data-aos="fade-down" id="navbar">
+    <header className="sticky top-0 z-50 font-bold bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg backdrop-saturate-200 border-b-[0.5px] border-b-true-gray-100" dark="bg-true-gray-900/70 border-b-true-gray-800" data-aos="fade-down" id="navbar">
       <div className="flex items-center justify-between px-6 py-3 mx-auto lg:px-11 lg:w-screen-lg whitespace-nowrap">
         <div className="z-50">
-          <Link href="/">异次元の机智君</Link>
+        <Link href="/">异次元の机智君</Link>
         </div>
         <div className="flex items-center">
-          {isPost ? (
+          {isPost ?
             <Menu>
               <Menu.Button className="flex items-center px-0 m-0 mr-6 z-50">
-                {({ open }) => (!open ? <TocIcon /> : <TocFillIcon />)}
+                {({ open }) => (
+                  !open && <TocIcon /> || <TocFillIcon />
+                )}
               </Menu.Button>
               <Transition
                 as={Fragment}
@@ -91,18 +93,18 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
                 leaveFrom="transform opacity-100"
                 leaveTo="transform opacity-0"
               >
-                <Menu.Items className="absolute top-0 left-0 w-full h-screen bg-true-gray-900/50 backdrop-filter backdrop-blur-sm dark:bg-true-gray-900/70">
-                  <Menu.Item>
-                    <div className="flex place-items-center w-full h-full">
-                      <div className="mx-5 w-full sm:mx-auto md:w-150 overflow-scroll bg-white rounded-3xl scrollbar-hide dark:bg-black">
-                        <PostToc blocks={toc} />
-                      </div>
+              <Menu.Items className="absolute top-0 left-0 w-full h-100vh bg-true-gray-900/50 backdrop-filter backdrop-blur-sm" dark="bg-true-gray-900/70">
+                <Menu.Item>
+                  <div className="flex place-items-center w-full h-full">
+                    <div className="mx-5 w-full sm:mx-auto md:w-150 overflow-scroll bg-white rounded-3xl scrollbar-hide" dark="bg-black">
+                      <PostToc blocks={toc} />
                     </div>
-                  </Menu.Item>
-                </Menu.Items>
+                  </div>
+                </Menu.Item>
+              </Menu.Items>
               </Transition>
             </Menu>
-          ) : null}
+            : null}
           <nav className="flex items-center justify-center hidden space-x-5 sm:flex">
             {navigations.map((n, i) => (
               <Link href={n.link} key={i}>
@@ -114,7 +116,7 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
             ))}
           </nav>
           <div className="block sm:hidden">
-            <Menu as="div" className="relative text-left">
+            <Menu as="div" className="relative text-left ">
               <Menu.Button className="flex items-center px-0 m-0 text-current bg-transparent cursor-pointer rounded-3xl focus:outline-none">
                 {({ open }) => (
                   <MenuIcon className={`transition-transform duration-300 ease-in-out transform ${open ? "scale-y-flip" : ""}`} />
@@ -129,12 +131,12 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
               >
-                <Menu.Items className="absolute right-0 w-40 p-2 mt-5 origin-top-right shadow-md bg-white/70 rounded-3xl ring-0 focus:outline-none backdrop-filter backdrop-blur-lg backdrop-saturate-200 dark:bg-true-gray-900/70">
+                <Menu.Items className="absolute right-0 w-40 p-2 mt-5 origin-top-right shadow-md bg-white/70 rounded-3xl ring-0 focus:outline-none backdrop-filter backdrop-blur-lg backdrop-saturate-200" dark="bg-true-gray-900/70">
                   {navigations.map((n, i) => (
                     <div key={i}>
                       <Menu.Item>
                         {({ active }) => (
-                          <MenuItemLink className={`focus:outline-none p-2 flex items-center group ${active ? 'bg-true-gray-100 dark:bg-dark-800 rounded-3xl p-2' : ''}`} href={n.link}>
+                          <MenuItemLink className={`focus:outline-none p-2 flex items-center group ${active && 'bg-true-gray-100 rounded-3xl p-2 dark:hover:bg-dark-800'}`} href={n.link}>
                             {n.icon}
                             <span className={`pl-2 ${n.color}`}>{n.name}</span>
                           </MenuItemLink>
@@ -153,4 +155,4 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
   )
 }
 
-export default Navbar;
+export default Navbar
