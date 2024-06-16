@@ -1,16 +1,19 @@
 import Link from 'next/link';
 import { FC, Fragment } from 'react';
 import { Menu, Transition } from '@headlessui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faChevronDown as MenuIcon } from '@fortawesome/free-solid-svg-icons';
 import { faChevronUp as MenuOpenIcon } from '@fortawesome/free-solid-svg-icons';
 
-import TagsIcon from '../assets/tags.svg';
-import CategoriesIcon from '../assets/categories.svg';
-import FriendsIcon from '../assets/friends.svg';
-import MeIcon from '../assets/me.svg';
-import TocIcon from '../assets/toc.svg';
-import MenuIcon from '../assets/menu.svg';
-import TocFillIcon from '../assets/toc_fill.svg';
+import TagsIcon from '../assets/tags.svg'
+import CategoriesIcon from '../assets/categories.svg'
+import FriendsIcon from '../assets/friends.svg'
+import MeIcon from '../assets/me.svg'
+import TocIcon from '../assets/toc.svg'
+import MenuIcon from '../assets/menu.svg'
+import TocFillIcon from '../assets/toc_fill.svg'
+import DeviceIcon from '../assets/device.svg'
+import TalkIcon from '../assets/talk.svg'
 
 import { Colors } from '../lib/colors';
 import { useRouter } from 'next/router';
@@ -18,43 +21,55 @@ import PostToc from './PostToc';
 
 const navigations = [
   {
-    name: 'Tags',
+    name: '标签',
     link: '/tags',
     icon: <TagsIcon />,
     color: Colors['pink'].text.normal,
   },
   {
-    name: 'Categories',
+    name: '分类',
     link: '/categories',
     icon: <CategoriesIcon />,
     color: Colors['orange'].text.normal,
   },
   {
-    name: 'Friends',
+    name: '朋友们',
     link: '/friends',
     icon: <FriendsIcon />,
     color: Colors['blue'].text.normal,
   },
   {
-    name: 'Me',
+    name: '装备',
+    link: '/devices',
+    icon: <DeviceIcon />,
+    color: Colors['green'].text.normal,
+  },
+  {
+    name: '说说',
+    link: '/bibi',
+    icon: <TalkIcon />,
+    color: Colors['yellow'].text.normal,
+  },
+  {
+    name: '关于我',
     link: '/me',
     icon: <MeIcon />,
     color: Colors['red'].text.normal,
   },
-];
+]
 
 const MenuItemLink = (props: { [x: string]: any; href: any; children: any }) => {
-  const { href, children, ...rest } = props;
+  const { href, children, ...rest } = props
   return (
     <Link href={href}>
       <a {...rest}>{children}</a>
     </Link>
-  );
-};
+  )
+}
 
 const Navbar: FC<{ toc: any }> = ({ toc }) => {
-  const path = useRouter().asPath;
-  const isPost = path.startsWith('/post/');
+  const path = useRouter().asPath
+  const isPost = path.startsWith('/post/')
   return (
     <header className="sticky top-0 z-50 font-bold bg-white bg-opacity-70 backdrop-filter backdrop-blur-lg backdrop-saturate-200 border-b-[0.5px] border-b-true-gray-100 dark:bg-true-gray-900/70 dark:border-b-true-gray-800" data-aos="fade-down" id="navbar">
       <div className="flex items-center justify-between px-6 py-3 mx-auto lg:px-11 lg:w-screen-lg whitespace-nowrap">
@@ -76,7 +91,7 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
                 leaveFrom="transform opacity-100"
                 leaveTo="transform opacity-0"
               >
-                <Menu.Items className="absolute top-0 left-0 w-full h-100vh bg-true-gray-900/50 backdrop-filter backdrop-blur-sm dark:bg-true-gray-900/70">
+                <Menu.Items className="absolute top-0 left-0 w-full h-screen bg-true-gray-900/50 backdrop-filter backdrop-blur-sm dark:bg-true-gray-900/70">
                   <Menu.Item>
                     <div className="flex place-items-center w-full h-full">
                       <div className="mx-5 w-full sm:mx-auto md:w-150 overflow-scroll bg-white rounded-3xl scrollbar-hide dark:bg-black">
@@ -93,7 +108,7 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
               <Link href={n.link} key={i}>
                 <a className="flex items-center justify-center space-x-1 group" href={n.link}>
                   {n.icon}
-                  <div className={`w-0 overflow-hidden ease-in-out transition-all duration-600 ${n.color}`}>{n.name}</div>
+                  <div className={`w-0 overflow-hidden ease-in-out transition-all duration-600 ${n.color} ${n.width}`}>{n.name}</div>
                 </a>
               </Link>
             ))}
@@ -107,21 +122,21 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
               </Menu.Button>
               <Transition
                 as={Fragment}
-                enter="transition duration-150 ease-out"
+                enter="transition duration-100 ease-out"
                 enterFrom="transform scale-95 opacity-0"
                 enterTo="transform scale-100 opacity-100"
-                leave="transition duration-150 ease-in"
+                leave="transition duration-100 ease-out"
                 leaveFrom="transform scale-100 opacity-100"
                 leaveTo="transform scale-95 opacity-0"
               >
-                <Menu.Items className="absolute top-0 left-0 w-full h-screen p-4 mt-2 bg-white bg-opacity-90 dark:bg-true-gray-900/80 backdrop-filter backdrop-blur-lg grid grid-cols-2 gap-4">
+                <Menu.Items className="absolute right-0 w-40 p-2 mt-5 origin-top-right shadow-md bg-white/70 rounded-3xl ring-0 focus:outline-none backdrop-filter backdrop-blur-lg backdrop-saturate-200 dark:bg-true-gray-900/70">
                   {navigations.map((n, i) => (
-                    <div key={i} className="col-span-1">
+                    <div key={i}>
                       <Menu.Item>
                         {({ active }) => (
-                          <MenuItemLink className={`flex items-center p-2 rounded-lg ${active && 'bg-true-gray-100 dark:bg-true-gray-800'}`} href={n.link}>
+                          <MenuItemLink className={`focus:outline-none p-2 flex items-center group ${active ? 'bg-true-gray-100 dark:bg-dark-800 rounded-3xl p-2' : ''}`} href={n.link}>
                             {n.icon}
-                            <span className={`ml-2 ${n.color}`}>{n.name}</span>
+                            <span className={`pl-2 ${n.color}`}>{n.name}</span>
                           </MenuItemLink>
                         )}
                       </Menu.Item>
@@ -131,10 +146,11 @@ const Navbar: FC<{ toc: any }> = ({ toc }) => {
               </Transition>
             </Menu>
           </div>
+          {/* <Toggle /> */}
         </div>
       </div>
     </header>
-  );
-};
+  )
+}
 
 export default Navbar;
