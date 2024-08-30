@@ -11,9 +11,14 @@ interface DeviceType {
 
 const devices: DeviceType[] = [
     {
+        name: "魅族21NOTE",
+        img: "https://cdn.dribbble.com/userupload/16336463/file/original-fdad7561b84872f7e5e8b8175b18f75e.webp",
+        description: "新手机，第一次用魅族，体验了一把Flyme。"
+    },
+    {
         name: "小米 12X",
         img: "https://cdn.dribbble.com/userupload/15094426/file/original-432a42e3f5a630933b111435d9c67dad.webp",
-        description: "好用，小巧次旗舰，小团子送我的！我要用好久！。"
+        description: "好用，小巧次旗舰，小团子送我的！我要用好久！"
     },
     {
         name: "荣耀手环6",
