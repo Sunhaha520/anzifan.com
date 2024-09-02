@@ -38,6 +38,6 @@ export const friends: FriendType[] = [
   {
     url: 'https://www.xalaok.top/',
     name: 'Naive Koala 🐨',
-    img: 'https://cravatar.cn/avatar/44e7a197aa88dcad4764a1c0ea508d8c',
+    img: 'https://jsd.cdn.zzko.cn/gh/Sunhaha520/picx-images-hosting@master/lunwen1/44e7a197aa88dcad4764a1c0ea508d8c.7p3jn3kvpz.webp',
   },
 ]
