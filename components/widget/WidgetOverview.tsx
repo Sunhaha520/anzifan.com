@@ -1,6 +1,6 @@
-import { FC, useEffect, useState } from "react"
-import Image from "next/image"
-import { links, LinkType } from "../../config/links"
+import { FC, useEffect, useState } from "react";
+import Image from "next/image";
+import { links, LinkType } from "../../config/links";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -12,9 +12,9 @@ import {
     BarElement,
 } from 'chart.js';
 import { Line, Bar, Scatter } from 'react-chartjs-2';
-import { Colors } from "../../lib/colors"
-import gradient from "chartjs-plugin-gradient"
-import { Tooltip } from "../utility/Tooltip"
+import { Colors } from "../../lib/colors";
+import gradient from "chartjs-plugin-gradient";
+import { Tooltip } from "../utility/Tooltip";
 import { GetStaticProps } from "next";
 import { getDatabase } from "../../lib/notion";
 import { Post } from "../../lib/types";
@@ -32,20 +32,38 @@ ChartJS.register(
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
-export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
-    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }))
-    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }))
-    const count = 0
-    const tagsAmount = tagsMap.reduce(
-        (prev, cur) => prev + cur.tags.length,
-        count
-    );
+const useWidgetData = (posts: Post[]) => {
+    const tagsMap = useMemo(() => posts.map(p => ({ tags: p.tags, date: p.updateDate })), [posts]);
+    const dateMap = useMemo(() => posts.map(p => ({ date: new Date(p.updateDate) })), [posts]);
+    const count = 0;
+    const tagsAmount = useMemo(() => tagsMap.reduce((prev, cur) => prev + cur.tags.length, count), [tagsMap]);
 
     const [visitCount, setVisitCount] = useState(5000);
 
     useEffect(() => {
-        setVisitCount(prevCount => prevCount + 1);
+        const script = document.createElement('script');
+        script.src = "//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js";
+        script.async = true;
+        document.body.appendChild(script);
+
+        script.onload = () => {
+            const busuanziValue = document.getElementById('busuanzi_value_site_pv');
+            if (busuanziValue) {
+                const busuanziCount = parseInt(busuanziValue.innerText, 10);
+                setVisitCount(prevCount => prevCount + busuanziCount);
+            }
+        };
+
+        return () => {
+            document.body.removeChild(script);
+        };
     }, []);
+
+    return { tagsMap, dateMap, tagsAmount, visitCount };
+};
+
+export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
+    const { tagsAmount, dateMap, visitCount } = useWidgetData(posts);
 
     return (
         <div data-aos="fade-up">
@@ -64,8 +82,10 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
+
+// 其他组件代码保持不变
 
 export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }))
