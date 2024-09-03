@@ -14,8 +14,8 @@ export const WidgetOverViewSmall: FC<{ posts: any[] }> = ({ posts }) => {
     return (
         <div data-aos="fade-up" className="bg-white dark:bg-true-gray-900 rounded-3xl shadow-lg transform transition-transform duration-500 hover:scale-105">
             <div className="flex flex-col p-6 h-full justify-between space-y-4">
-                <div className="text-3xl animate-wave mb-4">👋</div>
-                <div className="text-sm lg:text-base font-semibold space-y-1">
+                <div className="text-4xl lg:text-5xl animate-wave mb-4">👋</div>
+                <div className="text-lg lg:text-2xl font-semibold space-y-1">
                     <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
                     <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
                     <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
