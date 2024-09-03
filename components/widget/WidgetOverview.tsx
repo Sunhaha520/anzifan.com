@@ -1,368 +1,176 @@
-import { FC, useEffect, useState } from "react"
-import Image from "next/image"
-import { links, LinkType } from "../../config/links"
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Legend,
-    BarElement,
-} from 'chart.js';
-import { Line, Bar, Scatter } from 'react-chartjs-2';
-import { Colors } from "../../lib/colors"
-import gradient from "chartjs-plugin-gradient"
-import { Tooltip } from "../utility/Tooltip"
-import { GetStaticProps } from "next";
-import { getDatabase } from "../../lib/notion";
-import { Post } from "../../lib/types";
-import useSWRImmutable from 'swr/immutable';
+import { FC, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
+import { Post } from "../../lib/types";
+import { Colors } from "../../lib/colors";
 
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    BarElement,
-    gradient
-);
+const AnalogClock: FC = () => {
+  useEffect(() => {
+    const setClock = () => {
+      const deg = 6;
+      const hour = document.querySelector(".hour") as HTMLElement;
+      const min = document.querySelector(".min") as HTMLElement;
+      const sec = document.querySelector(".sec") as HTMLElement;
 
-const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
+      if (hour && min && sec) {
+        let day = new Date();
+        let hh = day.getHours() * 30;
+        let mm = day.getMinutes() * deg;
+        let ss = day.getSeconds() * deg;
 
-export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
-    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
-    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
-    const count = 0;
-    const tagsAmount = tagsMap.reduce(
-        (prev, cur) => prev + cur.tags.length,
-        count
-    );
-
-    // 直接显示固定的“5个归档”
-    const categoryCount = 5;
-
-    return (
-        <div data-aos="fade-up">
-            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none">
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5" dark="bg-true-gray-900">
-                    <div className="flex flex-col justify-between">
-                        <div className="w-12 xs:text-[40px] animate-wave inline origin-bottom-right text-3xl">
-                            👋
-                        </div>
-                        <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
-                            <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
-                            <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个归档</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
-    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
-    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
-    const count = 0;
-    const tagsAmount = tagsMap.reduce(
-        (prev, cur) => prev + cur.tags.length,
-        count
-    );
-
-    // 直接显示固定的“5个归档”
-    const categoryCount = 5;
-
-    const monthPosts = dateMap.map(d => `${d.date.getFullYear()}-${(d.date.getMonth()).toString()}-${(d.date.getDate()) <= 15 ? "0" : "1"}`);
-    const currentMonth = { year: new Date().getFullYear(), month: (new Date().getMonth()) }
-    let previousMonthMapArray = []
-    for (let i = 0; i < 12; ++i) {
-        const previousMonth = new Date(currentMonth.year, currentMonth.month - i)
-        previousMonthMapArray.push({ date: `${previousMonth.getFullYear()}-${(previousMonth.getMonth()).toString()}-1`, count: 0 })
-        previousMonthMapArray.push({ date: `${previousMonth.getFullYear()}-${(previousMonth.getMonth()).toString()}-0`, count: 0 })
-    }
-    previousMonthMapArray.reverse().map(post => {
-        monthPosts.filter(p => {
-            if (p === post.date) {
-                post.count += 1
-            }
-        })
-    })
-
-    const postsDataset = previousMonthMapArray.map(p => p.count != 0 ? 1 : 0)
-
-    const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-    let todayMonth = new Date().getMonth();
-    const monthLabel = [monthArray[todayMonth - 12 < 0 ? todayMonth : todayMonth - 12], "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth - 6 < 0 ? todayMonth - 6 + 12 : todayMonth - 6], "", "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth]]
-
-    const { resolvedTheme } = useTheme()
-    const [mounted, setMounted] = useState(false)
-    useEffect(() => {
-        setMounted(true)
-    }, [])
-
-    if (!mounted) {
-        return null
-    }
-
-    const ticksColor = monthLabel.map((label, index) =>
-        parseInt(label) >= todayMonth + 1 && index != 23 ? resolvedTheme === "dark" ? "#434343":"#bababa" : resolvedTheme === "dark" ? "#ffffff":"#000000"
-    )
-
-    const postsData: any = {
-        labels: monthLabel,
-        datasets: [
-            {
-                data: postsDataset,
-                borderRadius: Number.MAX_VALUE,
-                borderSkipped: false,
-                barPercentage: 1,
-                gradient: {
-                    backgroundColor: {
-                        axis: 'y',
-                        colors: {
-                            0: 'rgba(255, 149, 0, 1)',
-                            100: 'rgba(255, 149, 0, 0.5)',
-                        }
-                    },
-                }
-            }
-        ]
-    }
-
-    const postsOptions: any = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            xAxes: {
-                afterFit: (axis: any) => {
-                    axis.paddingRight = 1;
-                    axis.paddingLeft = 1;
-                    axis.paddingTop = 6.5;
-                },
-                grid: {
-                    drawTicks: false,
-                    drawBorder: false,
-                    lineWidth: 1,
-                },
-                ticks: {
-                    padding: 5,
-                    display: true,
-                    autoSkip: false,
-                    maxRotation: 0,
-                    color: ticksColor,
-                    font: {
-                        size: 7,
-                        lineHeight: 1,
-                    }
-                }
-            },
-            yAxes: {
-                grid: {
-                    drawOnChartArea: false,
-                    drawTicks: false,
-                    drawBorder: false,
-                },
-                ticks: {
-                    display: false,
-                }
-            }
-        }
-    }
-
-    return (
-        <div data-aos="fade-up">
-            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)" dark="bg-true-gray-900">
-                    <div className="flex flex-col justify-between">
-                        <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
-                            👋
-                        </div>
-                        <div className={`text-lg leading-6 md:leading-7  ${fix ? "" : "lg:text-2xl"} font-semibold`}>
-                            <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
-                            <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
-                        </div>
-                    </div>
-                    <div className="text-xs w-6/11 lg:(w-1/2 text-md) lg<:text-sm font-medium h-full flex flex-col justify-between">
-                        <div>
-                            <p className="mb-2">访客</p>
-                            <div>
-                                <OverviewUv />
-                            </div>
-                        </div>
-                        <div>
-                            <p className="mb-2">访问</p>
-                            <OverviewPv />
-                        </div>
-                        <div>
-                            <p>文章</p>
-                            <div className="h-6.8 md:h-6.6 lg:h-7.3" >
-                                <Bar data={postsData} options={postsOptions} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
-const OverviewPv = () => {
-    const { data: pvData, error: pvError } = useSWRImmutable('/api/page-views', fetcher)
-    let pv = [9, 179, 78, 171, 109, 51, 97, 71, 59, 39, 41, 39, 60, 44, 65, 51, 80, 60, 97, 153, 4, 4, 42, 26, 72, 40, 92, 16, 21, 26, 38, 34, 43, 23, 30, 40, 21, 14, 74, 32, 46, 35, 84, 69, 45, 25, 85, 84, 85, 46, 53, 156, 62]
-
-    if (pvError) {
-        return (
-            <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
-                <BarChart data={pv} color="0, 122, 255" />
-            </Tooltip>
-        )
-    }
-
-    if (!pvData || pvData["pageHistory"] === undefined) {
-        return (
-            <div className="animate-pulse">
-                <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
-                    <BarChart data={pv} color="0, 122, 255" />
-                </Tooltip>
-            </div>
-        )
-    }
-
-    pv = pvData["pageHistory"]
-
-    return (
-        <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
-            <BarChart data={pv} color="0, 122, 255" />
-        </Tooltip>
-    )
-}
-
-const OverviewUv = () => {
-    const { data: uvData, error: uvError } = useSWRImmutable('/api/users-views', fetcher)
-    let uv = [8, 52, 45, 51, 54, 34, 46, 35, 37, 29, 34, 33, 36, 40, 51, 39, 50, 33, 53, 23, 4, 3, 16, 22, 32, 27, 31, 14, 12, 21, 15, 18, 18, 18, 15, 25, 13, 13, 25, 14, 25, 23, 44, 42, 28, 16, 26, 47, 58, 43, 36, 45, 36]
-
-    if (uvError) {
-        return (
-            <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
-                <BarChart data={uv} color="255, 45, 85" />
-            </Tooltip>
-        )
-    }
-
-    if (!uvData || uvData["usersHistory"] === undefined) {
-        return (
-            <div className="animate-pulse">
-                <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
-                    <BarChart data={uv} color="255, 45, 85" />
-                </Tooltip>
-            </div>
-        )
-    }
-
-    uv = uvData["usersHistory"]
-
-    return (
-        <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
-            <BarChart data={uv} color="255, 45, 85" />
-        </Tooltip>
-    )
-}
-
-function getTrimData(originalData: Array<number>, color?: any) {
-    const last48 = originalData.slice(Math.max(originalData.length - 48, 0))
-    const lowest = Math.max(...last48) / 7
-    const trimLast48 = last48.map((v: any) => v > lowest ? v : lowest)
-    const odd = trimLast48.filter((c: any, i: number) => i % 2)
-    const even = trimLast48.filter((c: any, i: number) => !(i % 2))
-    let colors: any = { 0: `rgba(${color}, 0.8)` }
-    colors[Math.max(...last48)] = `rgba(${color}, 0.4)`
-
-    return { odd, even, colors, last48 }
-}
-
-function createDataset(data: Array<number>, color: any) {
-    return {
-        data: data,
-        borderRadius: Number.MAX_VALUE,
-        borderSkipped: false,
-        backgroundColor: "rgba(0, 122, 255, 0.8)",
-        barPercentage: 0.8,
-        categoryPercentage: 0.95,
-        gradient: {
-            backgroundColor: {
-                axis: 'y',
-                colors: color
-            },
-        }
-    }
-}
-
-const BarChart = ({ data, color }: { data: number[], color: string }) => {
-
-    const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-    let todayMonth = new Date().getMonth();
-
-    const monthLabel = [monthArray[todayMonth - 12 < 0 ? todayMonth : todayMonth - 12], "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth - 6 < 0 ? todayMonth - 6 + 12 : todayMonth - 6], "", "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth]]
-
-    function barData(data: any, color: any): any {
-        return (
-            {
-                labels: monthLabel,
-                datasets: [
-                    createDataset(getTrimData(data).odd, getTrimData(data, color).colors),
-                    createDataset(getTrimData(data).even, getTrimData(data, color).colors),
-                ],
-            }
-        )
+        hour.style.transform = `rotateZ(${hh + mm / 12}deg)`;
+        min.style.transform = `rotateZ(${mm}deg)`;
+        sec.style.transform = `rotateZ(${ss}deg)`;
+      }
     };
 
-    function barOptions(data: any): any {
-        return ({
-            responsive: true,
-            borderRadius: Number.MAX_VALUE,
-            scales: {
-                xAxis: {
-                    afterFit: (axis: any) => {
-                        axis.paddingRight = 1;
-                        axis.paddingLeft = 1;
-                    },
-                    grid: {
-                        drawBorder: false,
-                        drawTicks: false,
-                    },
-                    ticks: {
-                        display: false,
-                        autoSkip: false,
-                        maxRotation: 0,
-                        font: {
-                            size: 8,
-                            lineHeight: 0.5,
-                        }
-                    }
-                },
-                yAxis: {
-                    min: Math.min(...getTrimData(data).last48) - 5,
-                    max: Math.max(...getTrimData(data).last48) + 5,
-                    grid: {
-                        drawOnChartArea: false,
-                        drawTicks: false,
-                        drawBorder: false,
-                    },
-                    ticks: {
-                        display: false,
-                        stepSize: Math.max(...getTrimData(data).last48),
-                        font: {
-                            size: 8,
-                        }
-                    }
-                }
-            }
-        })
-    }
-    return <Bar className="" data={barData(data, color)} options={barOptions(data)} width="100%" height="12" />
-}
+    setClock();
+    const interval = setInterval(setClock, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="clock">
+      <div className="hour"></div>
+      <div className="min"></div>
+      <div className="sec"></div>
+    </div>
+  );
+};
+
+export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
+  const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
+  const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
+  const count = 0;
+  const tagsAmount = tagsMap.reduce(
+    (prev, cur) => prev + cur.tags.length,
+    count
+  );
+
+  // 直接显示固定的“5个归档”
+  const categoryCount = 5;
+
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return null;
+  }
+
+  return (
+    <div data-aos="fade-up">
+      <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
+        <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)" dark="bg-true-gray-900">
+          <div className="flex flex-col justify-between">
+            <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
+              👋
+            </div>
+            <div className={`text-lg leading-6 md:leading-7  ${fix ? "" : "lg:text-2xl"} font-semibold`}>
+              <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
+              <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
+              <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
+            </div>
+          </div>
+          <div className="text-xs w-6/11 lg:(w-1/2 text-md) lg<:text-sm font-medium h-full flex flex-col justify-between">
+            <AnalogClock />
+          </div>
+        </div>
+      </div>
+      <style jsx global>
+        {`
+          :root {
+            --main-bg-color: #fff;
+            --main-text-color: #888888;
+          }
+
+          [data-theme="dark"] {
+            --main-bg-color: #1e1f26;
+            --main-text-color: #ccc;
+          }
+
+          .clock {
+            min-height: 18em;
+            min-width: 18em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--main-bg-color);
+            background-image: url("https://imvpn22.github.io/analog-clock/clock.png");
+            background-position: center center;
+            background-size: cover;
+            border-radius: 50%;
+            border: 4px solid var(--main-bg-color);
+            box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
+              inset 0 -15px 15px rgba(255, 255, 255, 0.05), 0 15px 15px rgba(0, 0, 0, 0.3),
+              inset 0 15px 15px rgba(0, 0, 0, 0.3);
+            transition: all ease 0.2s;
+          }
+
+          .clock:before {
+            content: "";
+            height: 0.75rem;
+            width: 0.75rem;
+            background-color: var(--main-text-color);
+            border: 2px solid var(--main-bg-color);
+            position: absolute;
+            border-radius: 50%;
+            z-index: 1000;
+            transition: all ease 0.2s;
+          }
+
+          .hour,
+          .min,
+          .sec {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            border-radius: 50%;
+          }
+
+          .hour {
+            height: 10em;
+            width: 10em;
+          }
+
+          .hour:before {
+            content: "";
+            position: absolute;
+            height: 50%;
+            width: 6px;
+            background-color: var(--main-text-color);
+            border-radius: 6px;
+          }
+
+          .min {
+            height: 12em;
+            width: 12em;
+          }
+
+          .min:before {
+            content: "";
+            height: 50%;
+            width: 4px;
+            background-color: var(--main-text-color);
+            border-radius: 4px;
+          }
+
+          .sec {
+            height: 13em;
+            width: 13em;
+          }
+
+          .sec:before {
+            content: "";
+            height: 60%;
+            width: 2px;
+            background-color: #f00;
+            border-radius: 2px;
+          }
+        `}
+      </style>
+    </div>
+  );
+};
