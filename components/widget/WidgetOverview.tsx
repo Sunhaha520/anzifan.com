@@ -1,11 +1,10 @@
 import { FC } from "react";
-import ReactMarkdown from 'react-markdown'; // Import react-markdown
 import useSWR from 'swr';
 import { Colors } from "../../lib/colors";
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
-export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
+export const WidgetOverViewSmall: FC<{ posts: any[] }> = ({ posts }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
     const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
     const count = 0;
@@ -14,7 +13,6 @@ export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
         count
     );
 
-    // 直接显示固定的“5个归档”
     const categoryCount = 5;
 
     return (
@@ -34,10 +32,10 @@ export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
+export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ posts, fix }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
     const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
     const count = 0;
@@ -46,7 +44,6 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
         count
     );
 
-    // 直接显示固定的“5个归档”
     const categoryCount = 5;
 
     const { data: memosData } = useSWR('https://tgapi.xiaoayu.eu.org/?tag=SFCN&limit=5&type=memos', fetcher);
@@ -77,8 +74,8 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                         <div className="text-sm font-medium">
                             <h2 className="mb-2 font-bold">最新说说</h2>
                             {latestMemos.map((memo: any) => (
-                                <div key={memo.id} className="mb-1 text-xs overflow-hidden text-ellipsis whitespace-nowrap">
-                                    <ReactMarkdown>{memo.content}</ReactMarkdown>
+                                <div key={memo.id} className="mb-1 text-xs">
+                                    {memo.content}
                                 </div>
                             ))}
                         </div>
@@ -86,5 +83,5 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
