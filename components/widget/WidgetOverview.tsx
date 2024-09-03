@@ -12,9 +12,14 @@ import {
     BarElement,
 } from 'chart.js';
 import { Line, Bar, Scatter } from 'react-chartjs-2';
-import { Colors } from "../../lib/colors"
-import gradient from "chartjs-plugin-gradient"
-import { Tooltip } from "../utility/Tooltip"
+import { Colors } from "../../lib/colors";
+import gradient from "chartjs-plugin-gradient";
+import { Tooltip } from "../utility/Tooltip";
+import { Tooltip } from "../utility/Tooltip";
+import { GetStaticProps } from "next";
+import { getDatabase } from "../../lib/notion";
+import { Post } from "../../lib/types";
+import useSWRImmutable from 'swr/immutable';
 import { useTheme } from "next-themes";
 
 ChartJS.register(
