@@ -20,6 +20,7 @@ import { getDatabase } from "../../lib/notion";
 import { Post } from "../../lib/types";
 import useSWRImmutable from 'swr/immutable';
 import { useTheme } from "next-themes";
+import useSWR from 'swr';
 
 ChartJS.register(
     CategoryScale,
@@ -76,6 +77,19 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
     // 直接显示固定的“5个归档”
     const categoryCount = 5;
 
+    const { data: memosData, error: memosError } = useSWR('https://tgapi.xiaoayu.eu.org/?tag=SFCN&limit=5&type=memos', fetcher);
+
+    if (memosError) return <div>加载失败</div>;
+    if (!memosData) return <div>加载中...</div>;
+
+    const latestMemos = memosData.map((memo: any) => {
+        const content = memo.content.replace(/<img.*?>/g, '🖼️');
+        return {
+            id: memo.id,
+            content: content.length > 50 ? content.slice(0, 50) + '...' : content
+        };
+    });
+
     return (
         <div data-aos="fade-up">
             <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
@@ -88,6 +102,16 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                             <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
                             <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
                             <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
+                        </div>
+                    </div>
+                    <div className="flex flex-col justify-between ml-4">
+                        <div className="text-sm font-medium">
+                            <h2 className="mb-2 font-bold">最新说说</h2>
+                            {latestMemos.map((memo: any) => (
+                                <div key={memo.id} className="mb-1">
+                                    {memo.content}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
