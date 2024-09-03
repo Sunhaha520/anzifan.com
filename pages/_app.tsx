@@ -55,6 +55,17 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
     };
   }, []);
 
+  useEffect(() => {
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '//cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css';
+    link.media = 'print';
+    link.onload = () => {
+      link.media = 'all';
+    };
+    document.head.appendChild(link);
+  }, []);
+
   const getLayout = Component.getLayout || ((page: any) => <BlogLayout>{page}</BlogLayout>);
 
   return (
@@ -67,7 +78,6 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <link rel="icon" type="image/png" sizes="32x32" href="/color.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/color.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <link rel="stylesheet" href="//cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css" media="print" onload="this.media='all'" />
         <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="f16983ff-10ab-49eb-a1ce-a5fca1ff70ba"></script>
       </Head>
       <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
