@@ -76,103 +76,6 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
     // 直接显示固定的“5个归档”
     const categoryCount = 5;
 
-    const monthPosts = dateMap.map(d => `${d.date.getFullYear()}-${(d.date.getMonth()).toString()}-${(d.date.getDate()) <= 15 ? "0" : "1"}`);
-    const currentMonth = { year: new Date().getFullYear(), month: (new Date().getMonth()) }
-    let previousMonthMapArray = []
-    for (let i = 0; i < 12; ++i) {
-        const previousMonth = new Date(currentMonth.year, currentMonth.month - i)
-        previousMonthMapArray.push({ date: `${previousMonth.getFullYear()}-${(previousMonth.getMonth()).toString()}-1`, count: 0 })
-        previousMonthMapArray.push({ date: `${previousMonth.getFullYear()}-${(previousMonth.getMonth()).toString()}-0`, count: 0 })
-    }
-    previousMonthMapArray.reverse().map(post => {
-        monthPosts.filter(p => {
-            if (p === post.date) {
-                post.count += 1
-            }
-        })
-    })
-
-    const postsDataset = previousMonthMapArray.map(p => p.count != 0 ? 1 : 0)
-
-    const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-    let todayMonth = new Date().getMonth();
-    const monthLabel = [monthArray[todayMonth - 12 < 0 ? todayMonth : todayMonth - 12], "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth - 6 < 0 ? todayMonth - 6 + 12 : todayMonth - 6], "", "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth]]
-
-    const { resolvedTheme } = useTheme()
-    const [mounted, setMounted] = useState(false)
-    useEffect(() => {
-        setMounted(true)
-    }, [])
-
-    if (!mounted) {
-        return null
-    }
-
-    const ticksColor = monthLabel.map((label, index) =>
-        parseInt(label) >= todayMonth + 1 && index != 23 ? resolvedTheme === "dark" ? "#434343":"#bababa" : resolvedTheme === "dark" ? "#ffffff":"#000000"
-    )
-
-    const postsData: any = {
-        labels: monthLabel,
-        datasets: [
-            {
-                data: postsDataset,
-                borderRadius: Number.MAX_VALUE,
-                borderSkipped: false,
-                barPercentage: 1,
-                gradient: {
-                    backgroundColor: {
-                        axis: 'y',
-                        colors: {
-                            0: 'rgba(255, 149, 0, 1)',
-                            100: 'rgba(255, 149, 0, 0.5)',
-                        }
-                    },
-                }
-            }
-        ]
-    }
-
-    const postsOptions: any = {
-        responsive: true,
-        maintainAspectRatio: false,
-        scales: {
-            xAxes: {
-                afterFit: (axis: any) => {
-                    axis.paddingRight = 1;
-                    axis.paddingLeft = 1;
-                    axis.paddingTop = 6.5;
-                },
-                grid: {
-                    drawTicks: false,
-                    drawBorder: false,
-                    lineWidth: 1,
-                },
-                ticks: {
-                    padding: 5,
-                    display: true,
-                    autoSkip: false,
-                    maxRotation: 0,
-                    color: ticksColor,
-                    font: {
-                        size: 7,
-                        lineHeight: 1,
-                    }
-                }
-            },
-            yAxes: {
-                grid: {
-                    drawOnChartArea: false,
-                    drawTicks: false,
-                    drawBorder: false,
-                },
-                ticks: {
-                    display: false,
-                }
-            }
-        }
-    }
-
     return (
         <div data-aos="fade-up">
             <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
@@ -186,6 +89,7 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                             <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
                             <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
                         </div>
+                    </div>
                 </div>
             </div>
         </div>
