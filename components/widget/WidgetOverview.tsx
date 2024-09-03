@@ -41,10 +41,8 @@ export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
         count
     );
 
-    // 计算 Category 的个数
-    const categoriesMap = posts.flatMap(p => p.tags.map(tag => tag.category));
-    const uniqueCategories = [...new Set(categoriesMap)];
-    const categoryCount = uniqueCategories.length;
+    // 直接显示固定的“5个归档”
+    const categoryCount = 5;
 
     return (
         <div data-aos="fade-up">
@@ -75,10 +73,8 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
         count
     );
 
-    // 计算 Category 的个数
-    const categoriesMap = posts.flatMap(p => p.tags.map(tag => tag.category));
-    const uniqueCategories = [...new Set(categoriesMap)];
-    const categoryCount = uniqueCategories.length;
+    // 直接显示固定的“5个归档”
+    const categoryCount = 5;
 
     const monthPosts = dateMap.map(d => `${d.date.getFullYear()}-${(d.date.getMonth()).toString()}-${(d.date.getDate()) <= 15 ? "0" : "1"}`);
     const currentMonth = { year: new Date().getFullYear(), month: (new Date().getMonth()) }
