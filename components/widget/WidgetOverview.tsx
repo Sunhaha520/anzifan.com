@@ -32,44 +32,24 @@ ChartJS.register(
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
-const fetchVisitsData = async () => {
-    const url = "https://status.xiaoayu.ren/api/websites/f16983ff-10ab-49eb-a1ce-a5fca1ff70ba/stats";
-    const current_time_ms = Math.floor(Date.now());
-    const params = {
-        "startAt": "1656679719687",
-        "endAt": current_time_ms.toString()
-    };
-    const headers = {
-        "Accept": "application/json",
-        "Authorization": "Bearer OB0/RiJwtrc52+Nv1rHpi3SPcg2gtR0tfIPOh3zw3Fr7sDd4b/lWPu71cBKpPbRPAXjUw7ddVCpjGZjZCs94tAs3DKwufhvSLrcnExLLQYzID3Tnfaeez5t8clkzpi9pyTbGThBWUH/sHi6gJnXaGtzU+Nz65vtvBqpXGZcV1L1TzZZQpIhGgFTcmtcnQ9PoozXYwoyL5dOXrrRVGDED60KaSz3zZFYhJYhi11TZrnm6PGHhIb689f8QcJQYt3Fj1cKJ78GPfQR76/ZfD5mSqfJNMfaTDCxVZIz1uewitiG5xDbtNXhshS131S0By6dx9hHAdCqKfYVqMzJK+Nkw79jZmQXNPbKy3g=="
-    };
-
-    const response = await fetch(url, { headers, method: 'GET', body: JSON.stringify(params) });
-    const data = await response.json();
-    return data.visits.value;
-};
-
-export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
-    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }))
-    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }))
-    const count = 0
+export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
+    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
+    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
+    const count = 0;
     const tagsAmount = tagsMap.reduce(
         (prev, cur) => prev + cur.tags.length,
         count
     );
 
-    const [visits, setVisits] = useState(5000);
-
-    useEffect(() => {
-        fetchVisitsData().then(newVisits => {
-            setVisits(5000 + newVisits);
-        });
-    }, []);
+    // 计算 Category 的个数
+    const categoriesMap = posts.flatMap(p => p.tags.map(tag => tag.category));
+    const uniqueCategories = [...new Set(categoriesMap)];
+    const categoryCount = uniqueCategories.length;
 
     return (
         <div data-aos="fade-up">
             <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none">
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5 " dark="bg-true-gray-900">
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5" dark="bg-true-gray-900">
                     <div className="flex flex-col justify-between">
                         <div className="w-12 xs:text-[40px] animate-wave inline origin-bottom-right text-3xl">
                             👋
@@ -77,7 +57,7 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
                         <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
                             <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
                             <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
-                            <OverviewPvAll visits={visits} />
+                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个归档</p>
                         </div>
                     </div>
                 </div>
@@ -87,13 +67,19 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
 }
 
 export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
-    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }))
-    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }))
-    const count = 0
+    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
+    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
+    const count = 0;
     const tagsAmount = tagsMap.reduce(
         (prev, cur) => prev + cur.tags.length,
         count
     );
+
+    // 计算 Category 的个数
+    const categoriesMap = posts.flatMap(p => p.tags.map(tag => tag.category));
+    const uniqueCategories = [...new Set(categoriesMap)];
+    const categoryCount = uniqueCategories.length;
+
     const monthPosts = dateMap.map(d => `${d.date.getFullYear()}-${(d.date.getMonth()).toString()}-${(d.date.getDate()) <= 15 ? "0" : "1"}`);
     const currentMonth = { year: new Date().getFullYear(), month: (new Date().getMonth()) }
     let previousMonthMapArray = []
@@ -113,20 +99,14 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
     const postsDataset = previousMonthMapArray.map(p => p.count != 0 ? 1 : 0)
 
     const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
-
     let todayMonth = new Date().getMonth();
     const monthLabel = [monthArray[todayMonth - 12 < 0 ? todayMonth : todayMonth - 12], "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth - 6 < 0 ? todayMonth - 6 + 12 : todayMonth - 6], "", "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth]]
 
     const { resolvedTheme } = useTheme()
     const [mounted, setMounted] = useState(false)
-    const [visits, setVisits] = useState(5000);
-
     useEffect(() => {
         setMounted(true)
-        fetchVisitsData().then(newVisits => {
-            setVisits(5000 + newVisits);
-        });
-    }, []);
+    }, [])
 
     if (!mounted) {
         return null
@@ -178,7 +158,6 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                     autoSkip: false,
                     maxRotation: 0,
                     color: ticksColor,
-                    borderWidth: 10,
                     font: {
                         size: 7,
                         lineHeight: 1,
@@ -209,7 +188,7 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                         <div className={`text-lg leading-6 md:leading-7  ${fix ? "" : "lg:text-2xl"} font-semibold`}>
                             <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
                             <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
-                            <OverviewPvAll visits={visits} />
+                            <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
                         </div>
                     </div>
                     <div className="text-xs w-6/11 lg:(w-1/2 text-md) lg<:text-sm font-medium h-full flex flex-col justify-between">
@@ -295,16 +274,6 @@ const OverviewUv = () => {
         <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
             <BarChart data={uv} color="255, 45, 85" />
         </Tooltip>
-    )
-}
-
-interface OverviewPvAllProps {
-    visits: number;
-}
-
-const OverviewPvAll: FC<OverviewPvAllProps> = ({ visits }) => {
-    return (
-        <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{visits.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 次访问</p>
     )
 }
 
