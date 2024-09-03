@@ -62,11 +62,12 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <title>可乐君的个人主页</title>
-        <meta name="description" content="阿愚君の小站" />
+        <meta name="description" content="可乐君の小站" />
         <link rel="apple-touch-icon" sizes="180x180" href="/color.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/color.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/color.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="268a92b5-a882-4e48-8f88-1299d447005a"></script>
       </Head>
       <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
       {getLayout(
