@@ -20,8 +20,6 @@ import { getDatabase } from "../../lib/notion";
 import { Post } from "../../lib/types";
 import useSWRImmutable from 'swr/immutable';
 import { useTheme } from "next-themes";
-import requests from 'requests';
-import time from 'time';
 
 ChartJS.register(
     CategoryScale,
@@ -36,18 +34,18 @@ const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
 const fetchVisitsData = async () => {
     const url = "https://status.xiaoayu.ren/api/websites/f16983ff-10ab-49eb-a1ce-a5fca1ff70ba/stats";
-    const current_time_ms = int(time.time() * 1000);
+    const current_time_ms = Math.floor(Date.now());
     const params = {
         "startAt": "1656679719687",
-        "endAt": current_time_ms
+        "endAt": current_time_ms.toString()
     };
     const headers = {
         "Accept": "application/json",
         "Authorization": "Bearer OB0/RiJwtrc52+Nv1rHpi3SPcg2gtR0tfIPOh3zw3Fr7sDd4b/lWPu71cBKpPbRPAXjUw7ddVCpjGZjZCs94tAs3DKwufhvSLrcnExLLQYzID3Tnfaeez5t8clkzpi9pyTbGThBWUH/sHi6gJnXaGtzU+Nz65vtvBqpXGZcV1L1TzZZQpIhGgFTcmtcnQ9PoozXYwoyL5dOXrrRVGDED60KaSz3zZFYhJYhi11TZrnm6PGHhIb689f8QcJQYt3Fj1cKJ78GPfQR76/ZfD5mSqfJNMfaTDCxVZIz1uewitiG5xDbtNXhshS131S0By6dx9hHAdCqKfYVqMzJK+Nkw79jZmQXNPbKy3g=="
     };
 
-    const response = await requests.get(url, headers=headers, params=params);
-    const data = response.json();
+    const response = await fetch(url, { headers, method: 'GET', body: JSON.stringify(params) });
+    const data = await response.json();
     return data.visits.value;
 };
 
