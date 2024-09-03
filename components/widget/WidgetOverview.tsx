@@ -14,8 +14,8 @@ export const WidgetOverViewSmall: FC<{ posts: any[] }> = ({ posts }) => {
     return (
         <div data-aos="fade-up" className="bg-white dark:bg-true-gray-900 rounded-3xl shadow-lg transform transition-transform duration-500 hover:scale-105">
             <div className="flex flex-col p-6 h-full justify-between space-y-4">
-                <div className="text-5xl animate-wave mb-4">👋</div>
-                <div className="text-base lg:text-lg font-semibold space-y-1">
+                <div className="text-3xl animate-wave mb-4">👋</div>
+                <div className="text-sm lg:text-base font-semibold space-y-1">
                     <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
                     <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
                     <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
@@ -46,8 +46,8 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
         <div data-aos="fade-up" className={`bg-white dark:bg-true-gray-900 rounded-3xl shadow-lg transform transition-transform duration-500 hover:scale-105 ${fix ? "h-40 lg:h-44" : "h-48 lg:h-52"}`}>
             <div className="flex flex-row p-6 h-full justify-between">
                 <div className="flex flex-col justify-between">
-                    <div className="text-5xl lg:text-6xl animate-wave">👋</div>
-                    <div className="text-base lg:text-lg font-semibold space-y-1 mt-4">
+                    <div className="text-3xl lg:text-4xl animate-wave">👋</div>
+                    <div className="text-sm lg:text-base font-semibold space-y-1 mt-4">
                         <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
                         <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
                         <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
