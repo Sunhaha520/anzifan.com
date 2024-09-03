@@ -104,11 +104,11 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                             <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-between ml-4">
+                    <div className="flex flex-col justify-between ml-4 w-1/3">
                         <div className="text-sm font-medium">
                             <h2 className="mb-2 font-bold">最新说说</h2>
                             {latestMemos.map((memo: any) => (
-                                <div key={memo.id} className="mb-1">
+                                <div key={memo.id} className="mb-1 text-xs">
                                     {memo.content}
                                 </div>
                             ))}
