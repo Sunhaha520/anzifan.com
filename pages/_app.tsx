@@ -7,7 +7,6 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import BlogLayout from '../components/layout/BlogLayout'
 import Head from 'next/head'
-import { event, GoogleAnalytics } from 'nextjs-google-analytics'
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -76,15 +75,6 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
       )}
     </ThemeProvider>
   )
-}
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-  const { id, name, label, value } = metric
-  event(name, {
-    category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
-    value: Math.round(name === 'CLS' ? value * 1000 : value),
-    label: id,
-    nonInteraction: true,
-  })
 }
 
 export default MyApp
