@@ -298,7 +298,11 @@ const OverviewUv = () => {
     )
 }
 
-const OverviewPvAll = ({ visits }) => {
+interface OverviewPvAllProps {
+    visits: number;
+}
+
+const OverviewPvAll: FC<OverviewPvAllProps> = ({ visits }) => {
     return (
         <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{visits.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 次访问</p>
     )
