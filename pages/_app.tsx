@@ -68,8 +68,6 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <link rel="icon" type="image/png" sizes="16x16" href="/color.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="f16983ff-10ab-49eb-a1ce-a5fca1ff70ba"></script>
-        <script charset="UTF-8" id="LA_COLLECT" src="//sdk.51.la/js-sdk-pro.min.js"></script>
-        <script>LA.init({id:"3JZOamdPlSnUrrSS",ck:"3JZOamdPlSnUrrSS"})</script>
       </Head>
       <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
       {getLayout(
