@@ -186,15 +186,6 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                             <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
                             <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
                         </div>
-                    </div>
-                    <div className="text-xs w-6/11 lg:(w-1/2 text-md) lg<:text-sm font-medium h-full flex flex-col justify-between">
-                        <div>
-                            <p className="mb-2">文章</p>
-                            <div className="h-6.8 md:h-6.6 lg:h-7.3" >
-                                <Bar data={postsData} options={postsOptions} />
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
