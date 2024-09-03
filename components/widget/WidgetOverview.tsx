@@ -1,176 +1,202 @@
-import { FC, useEffect, useState } from "react";
-import { useTheme } from "next-themes";
+import { FC, useEffect, useState } from "react"
+import Image from "next/image"
+import { links, LinkType } from "../../config/links"
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Legend,
+    BarElement,
+} from 'chart.js';
+import { Line, Bar, Scatter } from 'react-chartjs-2';
+import { Colors } from "../../lib/colors"
+import gradient from "chartjs-plugin-gradient"
+import { Tooltip } from "../utility/Tooltip"
+import { GetStaticProps } from "next";
+import { getDatabase } from "../../lib/notion";
 import { Post } from "../../lib/types";
-import { Colors } from "../../lib/colors";
+import useSWRImmutable from 'swr/immutable';
+import { useTheme } from "next-themes";
 
-const AnalogClock: FC = () => {
-  useEffect(() => {
-    const setClock = () => {
-      const deg = 6;
-      const hour = document.querySelector(".hour") as HTMLElement;
-      const min = document.querySelector(".min") as HTMLElement;
-      const sec = document.querySelector(".sec") as HTMLElement;
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    BarElement,
+    gradient
+);
 
-      if (hour && min && sec) {
-        let day = new Date();
-        let hh = day.getHours() * 30;
-        let mm = day.getMinutes() * deg;
-        let ss = day.getSeconds() * deg;
+const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
-        hour.style.transform = `rotateZ(${hh + mm / 12}deg)`;
-        min.style.transform = `rotateZ(${mm}deg)`;
-        sec.style.transform = `rotateZ(${ss}deg)`;
-      }
-    };
+export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
+    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
+    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
+    const count = 0;
+    const tagsAmount = tagsMap.reduce(
+        (prev, cur) => prev + cur.tags.length,
+        count
+    );
 
-    setClock();
-    const interval = setInterval(setClock, 1000);
+    // 直接显示固定的“5个归档”
+    const categoryCount = 5;
 
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <div className="clock">
-      <div className="hour"></div>
-      <div className="min"></div>
-      <div className="sec"></div>
-    </div>
-  );
-};
+    return (
+        <div data-aos="fade-up">
+            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none">
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5" dark="bg-true-gray-900">
+                    <div className="flex flex-col justify-between">
+                        <div className="w-12 xs:text-[40px] animate-wave inline origin-bottom-right text-3xl">
+                            👋
+                        </div>
+                        <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
+                            <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
+                            <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
+                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个归档</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
-  const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
-  const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
-  const count = 0;
-  const tagsAmount = tagsMap.reduce(
-    (prev, cur) => prev + cur.tags.length,
-    count
-  );
+    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
+    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
+    const count = 0;
+    const tagsAmount = tagsMap.reduce(
+        (prev, cur) => prev + cur.tags.length,
+        count
+    );
 
-  // 直接显示固定的“5个归档”
-  const categoryCount = 5;
+    // 直接显示固定的“5个归档”
+    const categoryCount = 5;
 
-  const { resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+    const monthPosts = dateMap.map(d => `${d.date.getFullYear()}-${(d.date.getMonth()).toString()}-${(d.date.getDate()) <= 15 ? "0" : "1"}`);
+    const currentMonth = { year: new Date().getFullYear(), month: (new Date().getMonth()) }
+    let previousMonthMapArray = []
+    for (let i = 0; i < 12; ++i) {
+        const previousMonth = new Date(currentMonth.year, currentMonth.month - i)
+        previousMonthMapArray.push({ date: `${previousMonth.getFullYear()}-${(previousMonth.getMonth()).toString()}-1`, count: 0 })
+        previousMonthMapArray.push({ date: `${previousMonth.getFullYear()}-${(previousMonth.getMonth()).toString()}-0`, count: 0 })
+    }
+    previousMonthMapArray.reverse().map(post => {
+        monthPosts.filter(p => {
+            if (p === post.date) {
+                post.count += 1
+            }
+        })
+    })
 
-  if (!mounted) {
-    return null;
-  }
+    const postsDataset = previousMonthMapArray.map(p => p.count != 0 ? 1 : 0)
 
-  return (
-    <div data-aos="fade-up">
-      <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
-        <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)" dark="bg-true-gray-900">
-          <div className="flex flex-col justify-between">
-            <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
-              👋
+    const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    let todayMonth = new Date().getMonth();
+    const monthLabel = [monthArray[todayMonth - 12 < 0 ? todayMonth : todayMonth - 12], "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth - 6 < 0 ? todayMonth - 6 + 12 : todayMonth - 6], "", "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth]]
+
+    const { resolvedTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
+    useEffect(() => {
+        setMounted(true)
+    }, [])
+
+    if (!mounted) {
+        return null
+    }
+
+    const ticksColor = monthLabel.map((label, index) =>
+        parseInt(label) >= todayMonth + 1 && index != 23 ? resolvedTheme === "dark" ? "#434343":"#bababa" : resolvedTheme === "dark" ? "#ffffff":"#000000"
+    )
+
+    const postsData: any = {
+        labels: monthLabel,
+        datasets: [
+            {
+                data: postsDataset,
+                borderRadius: Number.MAX_VALUE,
+                borderSkipped: false,
+                barPercentage: 1,
+                gradient: {
+                    backgroundColor: {
+                        axis: 'y',
+                        colors: {
+                            0: 'rgba(255, 149, 0, 1)',
+                            100: 'rgba(255, 149, 0, 0.5)',
+                        }
+                    },
+                }
+            }
+        ]
+    }
+
+    const postsOptions: any = {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            xAxes: {
+                afterFit: (axis: any) => {
+                    axis.paddingRight = 1;
+                    axis.paddingLeft = 1;
+                    axis.paddingTop = 6.5;
+                },
+                grid: {
+                    drawTicks: false,
+                    drawBorder: false,
+                    lineWidth: 1,
+                },
+                ticks: {
+                    padding: 5,
+                    display: true,
+                    autoSkip: false,
+                    maxRotation: 0,
+                    color: ticksColor,
+                    font: {
+                        size: 7,
+                        lineHeight: 1,
+                    }
+                }
+            },
+            yAxes: {
+                grid: {
+                    drawOnChartArea: false,
+                    drawTicks: false,
+                    drawBorder: false,
+                },
+                ticks: {
+                    display: false,
+                }
+            }
+        }
+    }
+
+    return (
+        <div data-aos="fade-up">
+            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)" dark="bg-true-gray-900">
+                    <div className="flex flex-col justify-between">
+                        <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
+                            👋
+                        </div>
+                        <div className={`text-lg leading-6 md:leading-7  ${fix ? "" : "lg:text-2xl"} font-semibold`}>
+                            <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
+                            <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
+                            <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
+                        </div>
+                    </div>
+                    <div className="text-xs w-6/11 lg:(w-1/2 text-md) lg<:text-sm font-medium h-full flex flex-col justify-between">
+                        <div>
+                            <p className="mb-2">文章</p>
+                            <div className="h-6.8 md:h-6.6 lg:h-7.3" >
+                                <Bar data={postsData} options={postsOptions} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div className={`text-lg leading-6 md:leading-7  ${fix ? "" : "lg:text-2xl"} font-semibold`}>
-              <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
-              <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
-              <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
-            </div>
-          </div>
-          <div className="text-xs w-6/11 lg:(w-1/2 text-md) lg<:text-sm font-medium h-full flex flex-col justify-between">
-            <AnalogClock />
-          </div>
         </div>
-      </div>
-      <style jsx global>
-        {`
-          :root {
-            --main-bg-color: #fff;
-            --main-text-color: #888888;
-          }
-
-          [data-theme="dark"] {
-            --main-bg-color: #1e1f26;
-            --main-text-color: #ccc;
-          }
-
-          .clock {
-            min-height: 18em;
-            min-width: 18em;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: var(--main-bg-color);
-            background-image: url("https://imvpn22.github.io/analog-clock/clock.png");
-            background-position: center center;
-            background-size: cover;
-            border-radius: 50%;
-            border: 4px solid var(--main-bg-color);
-            box-shadow: 0 -15px 15px rgba(255, 255, 255, 0.05),
-              inset 0 -15px 15px rgba(255, 255, 255, 0.05), 0 15px 15px rgba(0, 0, 0, 0.3),
-              inset 0 15px 15px rgba(0, 0, 0, 0.3);
-            transition: all ease 0.2s;
-          }
-
-          .clock:before {
-            content: "";
-            height: 0.75rem;
-            width: 0.75rem;
-            background-color: var(--main-text-color);
-            border: 2px solid var(--main-bg-color);
-            position: absolute;
-            border-radius: 50%;
-            z-index: 1000;
-            transition: all ease 0.2s;
-          }
-
-          .hour,
-          .min,
-          .sec {
-            position: absolute;
-            display: flex;
-            justify-content: center;
-            border-radius: 50%;
-          }
-
-          .hour {
-            height: 10em;
-            width: 10em;
-          }
-
-          .hour:before {
-            content: "";
-            position: absolute;
-            height: 50%;
-            width: 6px;
-            background-color: var(--main-text-color);
-            border-radius: 6px;
-          }
-
-          .min {
-            height: 12em;
-            width: 12em;
-          }
-
-          .min:before {
-            content: "";
-            height: 50%;
-            width: 4px;
-            background-color: var(--main-text-color);
-            border-radius: 4px;
-          }
-
-          .sec {
-            height: 13em;
-            width: 13em;
-          }
-
-          .sec:before {
-            content: "";
-            height: 60%;
-            width: 2px;
-            background-color: #f00;
-            border-radius: 2px;
-          }
-        `}
-      </style>
-    </div>
-  );
-};
+    )
+}
