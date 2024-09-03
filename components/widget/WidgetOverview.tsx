@@ -85,8 +85,6 @@ export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
     );
 };
 
-// 其他组件代码保持不变
-
 export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }))
     const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }))
