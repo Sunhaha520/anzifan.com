@@ -67,7 +67,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <link rel="icon" type="image/png" sizes="32x32" href="/color.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/color.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="268a92b5-a882-4e48-8f88-1299d447005a"></script>
+        <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="f16983ff-10ab-49eb-a1ce-a5fca1ff70ba"></script>
       </Head>
       <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
       {getLayout(
