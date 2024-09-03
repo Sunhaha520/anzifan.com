@@ -34,7 +34,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
     const categoryCount = 5;
 
     const { data: memosData } = useSWR('https://tgapi.xiaoayu.eu.org/?tag=SFCN&limit=5&type=memos', fetcher);
-    const latestMemos = memosData ? memosData.slice(0, 4).map((memo: any, index: number) => {
+    const latestMemos = memosData ? memosData.slice(0, 3).map((memo: any, index: number) => {
         const contentWithEmoji = memo.content.replace(/<img.*?>/g, '🖼️');
         const content = contentWithEmoji.replace(/<a.*?>.*?<\/a>/g, '🔗');
         return {
