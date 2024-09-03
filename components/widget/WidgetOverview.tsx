@@ -12,9 +12,9 @@ import {
     BarElement,
 } from 'chart.js';
 import { Line, Bar, Scatter } from 'react-chartjs-2';
-import { Colors } from "../../lib/colors";
-import gradient from "chartjs-plugin-gradient";
-import { Tooltip } from "../utility/Tooltip";
+import { Colors } from "../../lib/colors"
+import gradient from "chartjs-plugin-gradient"
+import { Tooltip } from "../utility/Tooltip"
 import { GetStaticProps } from "next";
 import { getDatabase } from "../../lib/notion";
 import { Post } from "../../lib/types";
@@ -43,12 +43,8 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
 
     const [visitCount, setVisitCount] = useState(5000);
 
-    const handleVisitIncrement = () => {
-        setVisitCount(prevCount => prevCount + 1);
-    };
-
     useEffect(() => {
-        handleVisitIncrement(); // 模拟每次页面加载增加一次访问
+        setVisitCount(prevCount => prevCount + 1);
     }, []);
 
     return (
@@ -82,12 +78,8 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
 
     const [visitCount, setVisitCount] = useState(5000);
 
-    const handleVisitIncrement = () => {
-        setVisitCount(prevCount => prevCount + 1);
-    };
-
     useEffect(() => {
-        handleVisitIncrement(); // 模拟每次页面加载增加一次访问
+        setVisitCount(prevCount => prevCount + 1);
     }, []);
 
     const monthPosts = dateMap.map(d => `${d.date.getFullYear()}-${(d.date.getMonth()).toString()}-${(d.date.getDate()) <= 15 ? "0" : "1"}`);
@@ -230,12 +222,8 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
 const OverviewPv = () => {
     const [visitCount, setVisitCount] = useState(5000);
 
-    const handleVisitIncrement = () => {
-        setVisitCount(prevCount => prevCount + 1);
-    };
-
     useEffect(() => {
-        handleVisitIncrement(); // 模拟每次页面加载增加一次访问
+        setVisitCount(prevCount => prevCount + 1);
     }, []);
 
     let pv = [9, 179, 78, 171, 109, 51, 97, 71, 59, 39, 41, 39, 60, 44, 65, 51, 80, 60, 97, 153, 4, 4, 42, 26, 72, 40, 92, 16, 21, 26, 38, 34, 43, 23, 30, 40, 21, 14, 74, 32, 46, 35, 84, 69, 45, 25, 85, 84, 85, 46, 53, 156, 62]
@@ -250,12 +238,8 @@ const OverviewPv = () => {
 const OverviewUv = () => {
     const [visitCount, setVisitCount] = useState(5000);
 
-    const handleVisitIncrement = () => {
-        setVisitCount(prevCount => prevCount + 1);
-    };
-
     useEffect(() => {
-        handleVisitIncrement(); // 模拟每次页面加载增加一次访问
+        setVisitCount(prevCount => prevCount + 1);
     }, []);
 
     let uv = [8, 52, 45, 51, 54, 34, 46, 35, 37, 29, 34, 33, 36, 40, 51, 39, 50, 33, 53, 23, 4, 3, 16, 22, 32, 27, 31, 14, 12, 21, 15, 18, 18, 18, 15, 25, 13, 13, 25, 14, 25, 23, 44, 42, 28, 16, 26, 47, 58, 43, 36, 45, 36]
@@ -340,7 +324,7 @@ const BarChart = ({ data, color }: { data: number[], color: string }) => {
                     }
                 },
                 yAxis: {
-                    min: Math.min(...getTrimData(data).last48) - 5,
+                    min: Math.min(...getTrimData(data).last48)-5,
                     max: Math.max(...getTrimData(data).last48) + 5,
                     grid: {
                         drawOnChartArea: false,
@@ -360,3 +344,4 @@ const BarChart = ({ data, color }: { data: number[], color: string }) => {
     }
     return <Bar className="" data={barData(data, color)} options={barOptions(data)} width="100%" height="12" />
 }
+                                  
