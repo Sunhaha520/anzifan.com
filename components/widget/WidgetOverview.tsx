@@ -7,12 +7,15 @@ import {
     LinearScale,
     PointElement,
     LineElement,
+
     Title,
+    // Tooltip,
     Legend,
     BarElement,
 } from 'chart.js';
 import { Line, Bar, Scatter } from 'react-chartjs-2';
 import { Colors } from "../../lib/colors"
+// TODO: gradient is too big
 import gradient from "chartjs-plugin-gradient"
 import { Tooltip } from "../utility/Tooltip"
 import { GetStaticProps } from "next";
@@ -28,6 +31,8 @@ ChartJS.register(
     LineElement,
     BarElement,
     gradient
+    // Tooltip,
+    // Legend
 );
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
@@ -41,35 +46,14 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
         count
     );
 
-    const [visitCount, setVisitCount] = useState(5000);
-    const [visitorCount, setVisitorCount] = useState(0);
-
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "https://vercount.one/js";
-        script.defer = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            const busuanziValueSitePv = document.getElementById('busuanzi_value_site_pv');
-            const busuanziValueSiteUv = document.getElementById('busuanzi_value_site_uv');
-            if (busuanziValueSitePv && busuanziValueSiteUv) {
-                const busuanziPvCount = parseInt(busuanziValueSitePv.innerText, 10);
-                const busuanziUvCount = parseInt(busuanziValueSiteUv.innerText, 10);
-                setVisitCount(prevCount => prevCount + busuanziPvCount);
-                setVisitorCount(busuanziUvCount);
-            }
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
     return (
         <div data-aos="fade-up">
-            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none">
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5 " dark="bg-true-gray-900">
+            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none"
+            // data-aos="fade-up"
+            >
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5 " dark="bg-true-gray-900"
+                // data-aos="fade-up"         
+                >
                     <div className="flex flex-col justify-between">
                         <div className="w-12 xs:text-[40px] animate-wave inline origin-bottom-right text-3xl">
                             👋
@@ -77,8 +61,7 @@ export const WidgetOverViewSmall: FC<{ posts: Post[], }> = ({ posts }) => {
                         <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
                             <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
                             <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{visitCount} 次访问</p>
-                            <p className={`${Colors["green"]?.text.normal} line-clamp-1`}>{visitorCount} 位访客</p>
+                            <OverviewPvAll />
                         </div>
                     </div>
                 </div>
@@ -95,32 +78,6 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
         (prev, cur) => prev + cur.tags.length,
         count
     );
-
-    const [visitCount, setVisitCount] = useState(5000);
-    const [visitorCount, setVisitorCount] = useState(0);
-
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "https://vercount.one/js";
-        script.defer = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            const busuanziValueSitePv = document.getElementById('busuanzi_value_site_pv');
-            const busuanziValueSiteUv = document.getElementById('busuanzi_value_site_uv');
-            if (busuanziValueSitePv && busuanziValueSiteUv) {
-                const busuanziPvCount = parseInt(busuanziValueSitePv.innerText, 10);
-                const busuanziUvCount = parseInt(busuanziValueSiteUv.innerText, 10);
-                setVisitCount(prevCount => prevCount + busuanziPvCount);
-                setVisitorCount(busuanziUvCount);
-            }
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
     const monthPosts = dateMap.map(d => `${d.date.getFullYear()}-${(d.date.getMonth()).toString()}-${(d.date.getDate()) <= 15 ? "0" : "1"}`);
     const currentMonth = { year: new Date().getFullYear(), month: (new Date().getMonth()) }
     let previousMonthMapArray = []
@@ -140,6 +97,7 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
     const postsDataset = previousMonthMapArray.map(p => p.count != 0 ? 1 : 0)
 
     const monthArray = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    // const monthArray = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 
     let todayMonth = new Date().getMonth();
     const monthLabel = [monthArray[todayMonth - 12 < 0 ? todayMonth : todayMonth - 12], "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth - 6 < 0 ? todayMonth - 6 + 12 : todayMonth - 6], "", "", "", "", "", "", "", "", "", "", "", monthArray[todayMonth]]
@@ -193,6 +151,7 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                     drawTicks: false,
                     drawBorder: false,
                     lineWidth: 1,
+                    // color: ["#bababa","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5","#e5e5e5"]
                 },
                 ticks: {
                     padding: 5,
@@ -203,6 +162,7 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                     borderWidth: 10,
                     font: {
                         size: 7,
+                        // weight: "bold",
                         lineHeight: 1,
                     }
                 }
@@ -222,8 +182,12 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
 
     return (
         <div data-aos="fade-up">
-            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)" dark="bg-true-gray-900">
+            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none"
+            // data-aos="fade-up"
+            >
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2  lg:(px-4 py-3)" dark="bg-true-gray-900"
+                // data-aos="fade-up"
+                >
                     <div className="flex flex-col justify-between">
                         <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
                             👋
@@ -231,8 +195,7 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
                         <div className={`text-lg leading-6 md:leading-7  ${fix ? "" : "lg:text-2xl"} font-semibold`}>
                             <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
                             <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal}`}>{visitCount} 次访问</p>
-                            <p className={`${Colors["green"]?.text.normal}`}>{visitorCount} 位访客</p>
+                            <OverviewPvAll />
                         </div>
                     </div>
                     <div className="text-xs w-6/11 lg:(w-1/2 text-md) lg<:text-sm font-medium h-full flex flex-col justify-between">
@@ -260,64 +223,77 @@ export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ pos
 }
 
 const OverviewPv = () => {
-    const [visitCount, setVisitCount] = useState(5000);
-
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "https://vercount.one/js";
-        script.defer = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            const busuanziValueSitePv = document.getElementById('busuanzi_value_site_pv');
-            if (busuanziValueSitePv) {
-                const busuanziPvCount = parseInt(busuanziValueSitePv.innerText, 10);
-                setVisitCount(prevCount => prevCount + busuanziPvCount);
-            }
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
+    const { data: pvData, error: pvError } = useSWRImmutable('/api/page-views', fetcher)
     let pv = [9, 179, 78, 171, 109, 51, 97, 71, 59, 39, 41, 39, 60, 44, 65, 51, 80, 60, 97, 153, 4, 4, 42, 26, 72, 40, 92, 16, 21, 26, 38, 34, 43, 23, 30, 40, 21, 14, 74, 32, 46, 35, 84, 69, 45, 25, 85, 84, 85, 46, 53, 156, 62]
 
+    if (pvError) {
+        return (
+            <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
+                <BarChart data={pv} color="0, 122, 255" />
+            </Tooltip>
+        )
+    }
+
+    if (!pvData || pvData["pageHistory"] === undefined) {
+        return (
+            <div className="animate-pulse">
+                <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
+                    <BarChart data={pv} color="0, 122, 255" />
+                </Tooltip>
+            </div>
+        )
+    }
+
+    pv = pvData["pageHistory"]
+
     return (
+
         <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(pv).last48)} ⬆️${Math.max(...getTrimData(pv).last48)} (周)`}>
             <BarChart data={pv} color="0, 122, 255" />
         </Tooltip>
+
     )
 }
 
 const OverviewUv = () => {
-    const [visitorCount, setVisitorCount] = useState(0);
-
-    useEffect(() => {
-        const script = document.createElement('script');
-        script.src = "https://vercount.one/js";
-        script.defer = true;
-        document.body.appendChild(script);
-
-        script.onload = () => {
-            const busuanziValueSiteUv = document.getElementById('busuanzi_value_site_uv');
-            if (busuanziValueSiteUv) {
-                const busuanziUvCount = parseInt(busuanziValueSiteUv.innerText, 10);
-                setVisitorCount(busuanziUvCount);
-            }
-        };
-
-        return () => {
-            document.body.removeChild(script);
-        };
-    }, []);
-
+    const { data: uvData, error: uvError } = useSWRImmutable('/api/users-views', fetcher)
     let uv = [8, 52, 45, 51, 54, 34, 46, 35, 37, 29, 34, 33, 36, 40, 51, 39, 50, 33, 53, 23, 4, 3, 16, 22, 32, 27, 31, 14, 12, 21, 15, 18, 18, 18, 15, 25, 13, 13, 25, 14, 25, 23, 44, 42, 28, 16, 26, 47, 58, 43, 36, 45, 36]
+
+    if (uvError) {
+        return (
+            <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
+                <BarChart data={uv} color="255, 45, 85" />
+            </Tooltip>
+        )
+    }
+
+    if (!uvData || uvData["usersHistory"] === undefined) {
+        return (
+            <div className="animate-pulse">
+                <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
+                    <BarChart data={uv} color="255, 45, 85" />
+                </Tooltip>
+            </div>
+        )
+    }
+
+    uv = uvData["usersHistory"]
 
     return (
         <Tooltip tooltipText={`⬇️${Math.min(...getTrimData(uv).last48)} ⬆️${Math.max(...getTrimData(uv).last48)} (周)`}>
             <BarChart data={uv} color="255, 45, 85" />
         </Tooltip>
+    )
+}
+
+const OverviewPvAll = () => {
+    const { data: pvAllData, error: pvAllError } = useSWRImmutable('/api/page-views/all', fetcher)
+    if (pvAllError) return <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>25,223 次访问</p>
+    if (!pvAllData) return <p className={`${Colors["blue"]?.text.normal} animate-pulse line-clamp-1`}>- 次访问</p>
+    const pvAmount = pvAllData["pageViews"] || "-"
+
+    return (
+        <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{pvAmount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 次访问</p>
     )
 }
 
@@ -360,6 +336,7 @@ const BarChart = ({ data, color }: { data: number[], color: string }) => {
     function barData(data: any, color: any): any {
         return (
             {
+                // labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
                 labels: monthLabel,
                 datasets: [
                     createDataset(getTrimData(data).odd, getTrimData(data, color).colors),
@@ -382,19 +359,31 @@ const BarChart = ({ data, color }: { data: number[], color: string }) => {
                     grid: {
                         drawBorder: false,
                         drawTicks: false,
+                        // drawOnChartArea: false,
+                        // color: ["white","white","white",],
+                        // color: ['#bababa','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#bababa','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','#e5e5e5','red'],
+                        // lineWidth: .1,
                     },
                     ticks: {
                         display: false,
+                        // callback : function(val, index) {
+                        //     // Hide every 2nd tick label
+                        //     return index % 3 === 0 ? this.getLabelForValue(val) : '';
+                        //   },
                         autoSkip: false,
                         maxRotation: 0,
                         font: {
                             size: 8,
+                            // weight: "bold",
                             lineHeight: 0.5,
+                            // padding: "-10px",
                         }
                     }
                 },
                 yAxis: {
-                    min: Math.min(...getTrimData(data).last48)-5,
+                    // position: 'right',
+
+                    min: Math.min(...getTrimData(data).last48) - 5,
                     max: Math.max(...getTrimData(data).last48) + 5,
                     grid: {
                         drawOnChartArea: false,
