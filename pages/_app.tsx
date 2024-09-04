@@ -58,7 +58,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
   useEffect(() => {
     const link = document.createElement('link');
     link.rel = 'stylesheet';
-    link.href = '//cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.6.0/lxgwwenkaiscreen.css';
+    link.href = '//cdn.staticfile.org/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreen.css';
     link.media = 'print';
     link.onload = () => {
       link.media = 'all';
@@ -78,6 +78,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <link rel="icon" type="image/png" sizes="32x32" href="/color.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/color.png" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="stylesheet" href="https://cdn.jkjoy.cn/LxgwWenKai_Webfonts/dist/LXGWWenKai-Bold.css" />
         <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="f16983ff-10ab-49eb-a1ce-a5fca1ff70ba"></script>
       </Head>
       <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
