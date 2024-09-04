@@ -1,39 +1,5 @@
 import { FC, useEffect } from "react";
-import useSWR from 'swr';
 import { Colors } from "../../lib/colors";
-
-const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
-
-export const WidgetOverViewSmall: FC<{ posts: any[] }> = ({ posts }) => {
-    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
-    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
-    const count = 0;
-    const tagsAmount = tagsMap.reduce(
-        (prev, cur) => prev + cur.tags.length,
-        count
-    );
-
-    const categoryCount = 5;
-
-    return (
-        <div data-aos="fade-up">
-            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none">
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5" dark="bg-true-gray-900">
-                    <div className="flex flex-col justify-between">
-                        <div className="w-12 xs:text-[40px] animate-wave inline origin-bottom-right text-3xl">
-                            👋
-                        </div>
-                        <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
-                            <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
-                            <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个归档</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
 
 export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ posts, fix }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
@@ -62,14 +28,38 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     </div>
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
                         <div id="flip-wrapper" className="relative w-full h-full">
-                            <div id="flip-content" className="w-full h-full transition-transform duration-300 ease-in-out transform-style-3d">
-                                <div className="face absolute w-full h-full bg-cover bg-center" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16416991/file/original-48e9e4510957eff5c0010802d6115861.png)' }}></div>
-                                <div className="back face absolute w-full h-full bg-cover bg-center transform rotateY(180deg)" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16416992/file/original-25a4c429ef77925ec1ed925504c63f9d.webp)' }}></div>
+                            <div id="flip-content" className="w-full h-full transition-transform duration-300 transform-style preserve-3d">
+                                <div className="face absolute w-full h-full backface-hidden bg-cover bg-center" style={{ backgroundImage: 'url(https://img.zhheo.com/i/2022/08/31/630efc6e3e794.png)' }}>
+                                </div>
+                                <div className="back face absolute w-full h-full transform rotate-y-180 backface-hidden bg-cover bg-center" style={{ backgroundImage: 'url(https://bu.dusays.com/2022/10/30/635e9c6a228a3.png)' }}>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <style jsx>{`
+                #flip-wrapper {
+                    perspective: 1000px;
+                }
+
+                #flip-content {
+                    transform-style: preserve-3d;
+                    transition: transform 0.3s cubic-bezier(0, 0, 0, 1.29);
+                }
+
+                #flip-wrapper:hover #flip-content {
+                    transform: rotateY(180deg);
+                }
+
+                .face {
+                    backface-visibility: hidden;
+                }
+
+                [data-theme='light'] #flip-wrapper {
+                    background-color: #57bd6a;
+                }
+            `}</style>
         </div>
     )
 }
