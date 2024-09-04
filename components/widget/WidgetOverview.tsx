@@ -58,7 +58,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     const dynasty = document.querySelector("#poem_dynasty") as HTMLElement;
 
                     const sentenceText = result.data.content.slice(0, -1); // Remove last character
-                    if (sentence) sentence.innerHTML = `“${sentenceText}”`;
+                    if (sentence) sentence.innerHTML = sentenceText;
                     if (dynasty) dynasty.innerHTML = result.data.origin.dynasty;
                     if (author) author.innerHTML = `${result.data.origin.author}《${result.data.origin.title}》`;
                 });
@@ -86,7 +86,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
                         <div className="text-sm font-medium">
                             <h2 className="mb-2 font-bold text-green-500">今日诗词</h2>
-                            <div id="poem_sentence" className="mb-1 text-center p-4 flex items-center justify-center h-full text-lg line-clamp-1">
+                            <div id="poem_sentence" className="mb-1 text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded-3xl flex items-center justify-center h-full text-lg overflow-hidden whitespace-nowrap text-ellipsis">
                                 <span className="text-2xl">“</span>
                                 <span id="poem_sentence_text" className="text-2xl"></span>
                                 <span className="text-2xl">”</span>
