@@ -73,7 +73,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
         <div data-aos="fade-up">
             <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
                 <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2 lg:(px-4 py-3)" dark="bg-true-gray-900">
-                    <div className="flex flex-col justify-between">
+                    <div className="flex flex-col justify-between w-1/3">
                         <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
                             👋
                         </div>
@@ -83,12 +83,12 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                             <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-between ml-4 w-1/3">
+                    <div className="flex flex-col justify-between ml-4 w-2/3">
                         <div className="text-sm font-medium">
                             <h2 className="mb-2 font-bold text-green-500">今日诗词</h2>
-                            <div id="poem_sentence" className="mb-1 text-xs p-2 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded"></div>
-                            <div id="poem_info" className="text-xs text-gray-600 dark:text-gray-400">
-                                <div id="poem_dynasty" className="bg-red-500 text-white rounded-full px-2 py-1 inline-block"></div>
+                            <div id="poem_sentence" className="mb-1 text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded flex items-center justify-center h-full"></div>
+                            <div id="poem_info" className="text-xs text-gray-600 dark:text-gray-400 flex items-center">
+                                <div id="poem_dynasty" className="bg-red-500 text-white rounded-full px-2 py-1 inline-block mr-2"></div>
                                 <div id="poem_author" className="text-gray-500 dark:text-gray-400"></div>
                             </div>
                         </div>
