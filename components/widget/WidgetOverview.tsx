@@ -69,7 +69,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                         </Link>
                         <div className="space-y-2">
                             {latestMemos.map((memo: any) => (
-                                <div key={memo.id} className="text-sm lg:text-base text-gray-700 dark:text-gray-300 mb-1 truncate whitespace-nowrap relative">
+                                <div key={memo.id} className={`text-sm lg:text-base text-gray-700 dark:text-gray-300 mb-1 truncate whitespace-nowrap relative ${fix ? "" : "lg:text-lg"}`}>
                                     <strong>{memo.content.split('.')[0]}.</strong> {memo.content.split('.').slice(1).join('.')}
                                     <div className="absolute bottom-0 left-0 w-full h-0.5 bg-pink-300 dark:bg-pink-500" />
                                 </div>
