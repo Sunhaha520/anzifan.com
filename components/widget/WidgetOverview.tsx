@@ -1,8 +1,5 @@
-import { FC, useEffect } from "react";
-import useSWR from 'swr';
+import { FC } from "react";
 import { Colors } from "../../lib/colors";
-
-const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
 export const WidgetOverViewSmall: FC<{ posts: any[] }> = ({ posts }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
@@ -63,8 +60,8 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
                         <div id="flip-wrapper" className="relative w-full h-full">
                             <div id="flip-content" className="w-full h-full transition-transform duration-300 ease-in-out transform-style-3d">
-                                <div className="face absolute w-full h-full bg-cover bg-center" style={{ backgroundImage: 'url(正面图片路径)' }}></div>
-                                <div className="back face absolute w-full h-full bg-cover bg-center transform rotateY(180deg)" style={{ backgroundImage: 'url(背面图片路径)' }}></div>
+                                <div className="face absolute w-full h-full bg-cover bg-center" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16417445/file/original-fc2eb724c7be5de0a8ee5485c5b73f61.webp)' }}></div>
+                                <div className="back face absolute w-full h-full bg-cover bg-center transform rotateY(180deg)" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16416992/file/original-25a4c429ef77925ec1ed925504c63f9d.webp)' }}></div>
                             </div>
                         </div>
                     </div>
