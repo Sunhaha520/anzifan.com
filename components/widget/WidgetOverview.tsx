@@ -4,37 +4,6 @@ import { Colors } from "../../lib/colors";
 
 const fetcher = (url: RequestInfo) => fetch(url).then((res) => res.json());
 
-export const WidgetOverViewSmall: FC<{ posts: any[] }> = ({ posts }) => {
-    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
-    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
-    const count = 0;
-    const tagsAmount = tagsMap.reduce(
-        (prev, cur) => prev + cur.tags.length,
-        count
-    );
-
-    const categoryCount = 5;
-
-    return (
-        <div data-aos="fade-up">
-            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none">
-                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5" dark="bg-true-gray-900">
-                    <div className="flex flex-col justify-between">
-                        <div className="w-12 xs:text-[40px] animate-wave inline origin-bottom-right text-3xl">
-                            👋
-                        </div>
-                        <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
-                            <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
-                            <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个归档</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ posts, fix }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
     const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
@@ -71,7 +40,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
 
     return (
         <div data-aos="fade-up">
-            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
+            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-40 lg:h-44" : "h-44 lg:h-52"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
                 <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2 lg:(px-4 py-3)" dark="bg-true-gray-900">
                     <div className="flex flex-col justify-between w-1/3">
                         <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
@@ -85,7 +54,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     </div>
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
                         <div className="text-sm font-medium flex-grow">
-                            <div id="poem_sentence" className="mb-1 text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded-3xl flex items-center justify-center h-full text-lg overflow-hidden break-words" style={{ fontSize: 'clamp(12px, 2vw, 24px)', lineHeight: '1.2', textOverflow: 'ellipsis', whiteSpace: 'normal', overflow: 'hidden', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', display: '-webkit-box' }}>
+                            <div id="poem_sentence" className="mb-1 text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded-3xl flex items-center justify-center h-full text-lg overflow-hidden break-words" style={{ fontSize: 'clamp(12px, 2vw, 24px)', lineHeight: '1.2', textOverflow: 'ellipsis', whiteSpace: 'normal', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', display: '-webkit-box' }}>
                                 <span className="text-2xl">“</span>
                                 <span id="poem_sentence_text" className="text-2xl"></span>
                                 <span className="text-2xl">”</span>
