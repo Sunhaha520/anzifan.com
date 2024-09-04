@@ -60,7 +60,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
                         <div id="flip-wrapper" className="relative w-full h-full">
                             <div id="flip-content" className="w-full h-full transition-transform duration-300 ease-in-out transform-style-3d">
-                                <div className="face absolute w-full h-full bg-cover bg-center" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16417445/file/original-fc2eb724c7be5de0a8ee5485c5b73f61.webp)' }}></div>
+                                <div className="face absolute w-full h-full bg-cover bg-center" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16418982/file/original-3191c3baba674e3c3a35580cb4dafd5f.webp)' }}></div>
                                 <div className="back face absolute w-full h-full bg-cover bg-center transform rotateY(180deg)" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16416992/file/original-25a4c429ef77925ec1ed925504c63f9d.webp)' }}></div>
                             </div>
                         </div>
