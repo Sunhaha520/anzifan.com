@@ -85,11 +85,11 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     </div>
                     <div className="flex flex-col justify-between ml-4 w-1/3">
                         <div className="text-sm font-medium">
-                            <h2 className="mb-2 font-bold">古诗词</h2>
-                            <div id="poem_sentence" className="mb-1 text-xs"></div>
-                            <div id="poem_info" className="text-xs">
-                                <div id="poem_dynasty"></div>
-                                <div id="poem_author"></div>
+                            <h2 className="mb-2 font-bold text-green-500">今日诗词</h2>
+                            <div id="poem_sentence" className="mb-1 text-xs p-2 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded"></div>
+                            <div id="poem_info" className="text-xs text-gray-600 dark:text-gray-400">
+                                <div id="poem_dynasty" className="bg-red-500 text-white rounded-full px-2 py-1 inline-block"></div>
+                                <div id="poem_author" className="text-gray-500 dark:text-gray-400"></div>
                             </div>
                         </div>
                     </div>
