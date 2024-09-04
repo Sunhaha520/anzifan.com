@@ -82,14 +82,14 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     </div>
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
                         <div className="text-sm font-medium flex-grow">
-                            <div id="poem_sentence" className="mb-1 text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded-3xl flex items-center justify-center h-full text-lg overflow-hidden break-words" style={{ fontSize: 'clamp(12px, 2vw, 24px)', lineHeight: '1.2', textOverflow: 'ellipsis', whiteSpace: 'normal', overflow: 'hidden', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', display: '-webkit-box' }}>
+                            <div id="poem_sentence" className="text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded-3xl flex items-center justify-center h-full text-lg overflow-hidden break-words" style={{ fontSize: 'clamp(12px, 2vw, 24px)', lineHeight: '1.2', textOverflow: 'ellipsis', whiteSpace: 'normal', overflow: 'hidden', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', display: '-webkit-box' }}>
                                 <span className="text-2xl">“</span>
                                 <span id="poem_sentence_text" className="text-2xl"></span>
                                 <span className="text-2xl">”</span>
-                            </div>
-                            <div id="poem_info" className="text-xs text-gray-600 dark:text-gray-400 flex items-center mt-2">
-                                <div id="poem_dynasty" className="bg-red-500 text-white rounded-full px-2 py-1 inline-block mr-2"></div>
-                                <div id="poem_author" className="text-gray-500 dark:text-gray-400"></div>
+                                <div id="poem_info" className="text-xs text-gray-600 dark:text-gray-400 flex items-center mt-2 justify-center">
+                                    <div id="poem_dynasty" className="bg-red-500 text-white rounded-full px-2 py-1 inline-block mr-2"></div>
+                                    <div id="poem_author" className="text-gray-500 dark:text-gray-400"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
