@@ -80,6 +80,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="stylesheet" href="https://cdn.jkjoy.cn/LxgwWenKai_Webfonts/dist/LXGWWenKai-Bold.css" />
         <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="f16983ff-10ab-49eb-a1ce-a5fca1ff70ba"></script>
+        <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
       </Head>
       <NextNprogress color="#ff9500" options={{ showSpinner: false }} />
       {getLayout(
