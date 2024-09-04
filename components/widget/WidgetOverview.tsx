@@ -85,7 +85,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                     </div>
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
                         <div className="text-sm font-medium">
-                            <div id="poem_sentence" className="mb-1 text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded-3xl flex items-center justify-center h-full text-lg overflow-hidden break-words" style={{ fontSize: '2vw' }}>
+                            <div id="poem_sentence" className="mb-1 text-center p-4 border border-gray-200 bg-gray-100 dark:bg-gray-800 dark:border-gray-700 rounded-3xl flex items-center justify-center h-full text-lg overflow-hidden break-words" style={{ fontSize: 'clamp(12px, 2vw, 24px)' }}>
                                 <span className="text-2xl">“</span>
                                 <span id="poem_sentence_text" className="text-2xl"></span>
                                 <span className="text-2xl">”</span>
