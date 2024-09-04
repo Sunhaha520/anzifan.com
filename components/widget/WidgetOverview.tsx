@@ -1,7 +1,7 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Colors } from "../../lib/colors";
 
-export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ posts, fix }) => {
+export const WidgetOverViewSmall: FC<{ posts: Post[] }> = ({ posts }) => {
     const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
     const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
     const count = 0;
@@ -14,9 +14,40 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
 
     return (
         <div data-aos="fade-up">
-            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100`} dark="border-true-gray-900 border-none">
+            <div className="aspect-square overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100" dark="border-true-gray-900 border-none">
+                <div className="flex flex-row justify-between h-full bg-white shadow-sm p-3.5" dark="bg-true-gray-900">
+                    <div className="flex flex-col justify-between">
+                        <div className="w-12 xs:text-[40px] animate-wave inline origin-bottom-right text-3xl">
+                            👋
+                        </div>
+                        <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
+                            <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
+                            <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
+                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个归档</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export const WidgetOverViewMedium: FC<{ posts: Post[], fix?: boolean }> = ({ posts, fix }) => {
+    const tagsMap = posts.map(p => ({ tags: p.tags, date: p.updateDate }));
+    const dateMap = posts.map(p => ({ date: new Date(p.updateDate) }));
+    const count = 0;
+    const tagsAmount = tagsMap.reduce(
+        (prev, cur) => prev + cur.tags.length,
+        count
+    );
+
+    const categoryCount = 5;
+
+    return (
+        <div data-aos="fade-up" className="flex flex-col md:flex-row">
+            <div className={`overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu ${fix ? "h-35 lg:h-40" : "h-40 lg:h-48"} rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100 w-full md:w-2/3`} dark="border-true-gray-900 border-none">
                 <div className="flex flex-row justify-between h-full bg-white shadow-sm px-3 py-2 lg:(px-4 py-3)" dark="bg-true-gray-900">
-                    <div className="flex flex-col justify-between w-1/3">
+                    <div className="flex flex-col justify-between">
                         <div className={`text-4xl ${fix ? "" : "lg:text-5xl"} animate-wave inline origin-bottom-right w-12`}>
                             👋
                         </div>
@@ -26,14 +57,14 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                             <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
                         </div>
                     </div>
-                    <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
-                        <div id="flip-wrapper" className="relative w-full h-full">
-                            <div id="flip-content" className="w-full h-full transition-transform duration-300 transform-style preserve-3d">
-                                <div className="face absolute w-full h-full backface-hidden bg-cover bg-center" style={{ backgroundImage: 'url(https://img.zhheo.com/i/2022/08/31/630efc6e3e794.png)' }}>
-                                </div>
-                                <div className="back face absolute w-full h-full transform rotate-y-180 backface-hidden bg-cover bg-center" style={{ backgroundImage: 'url(https://bu.dusays.com/2022/10/30/635e9c6a228a3.png)' }}>
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div className="overflow-hidden transition duration-500 ease-in-out shadow-sm transform-gpu h-40 lg:h-48 rounded-3xl mobile-hover:hover:scale-105 mobile-hover:hover:shadow-lg hover:rotate-0 hover:active:scale-105 hover:active:shadow-lg border-[0.5px] border-true-gray-100 mt-4 md:mt-0 md:ml-4 w-full md:w-1/3" dark="border-true-gray-900 border-none">
+                <div id="flip-wrapper" className="relative w-full h-full">
+                    <div id="flip-content" className="w-full h-full transition-transform duration-300 transform-style preserve-3d">
+                        <div className="face absolute w-full h-full backface-hidden bg-cover bg-center rounded-3xl" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16417445/file/original-fc2eb724c7be5de0a8ee5485c5b73f61.webp)' }}>
+                        </div>
+                        <div className="back face absolute w-full h-full transform rotate-y-180 backface-hidden bg-cover bg-center rounded-3xl" style={{ backgroundImage: 'url(https://cdn.dribbble.com/userupload/16416992/file/original-25a4c429ef77925ec1ed925504c63f9d.webp)' }}>
                         </div>
                     </div>
                 </div>
