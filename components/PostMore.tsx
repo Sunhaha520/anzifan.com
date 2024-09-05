@@ -12,7 +12,7 @@ const PostMore: FC<{ posts: Post[] }> = ({ posts }) => {
     return (
         <div className="py-10 md:py-20">
             <h1 className={`mb-4 text-2xl font-bold md:text-3xl lg:mb-8`} data-aos="fade-up">
-                More Posts 🔭
+                更多文章 🔭
             </h1>
             <ul className={`flex flex-row flex-wrap items-stretch lg:-mr-16 mt-8 ${isEven ? "more-list" : ""}`}>
                 {posts.map((post) =>
