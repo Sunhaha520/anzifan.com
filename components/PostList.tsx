@@ -73,7 +73,7 @@ const PostList: NextPage<{ posts: Post[], filter?: string; color?: string, count
           <h1 className="mb-4 text-2xl font-bold md:text-3xl lg:mb-8"
           //  data-aos="fade-up"
           >
-            {filter == undefined ? "Latest Posts💫" :
+            {filter == undefined ? "最新文章💫" :
               <div className="flex justify-between">
                 <div>
                   <span
