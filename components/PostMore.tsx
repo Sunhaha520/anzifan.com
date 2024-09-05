@@ -47,7 +47,7 @@ const PostMore: FC<{ posts: Post[] }> = ({ posts }) => {
             <div data-aos="fade-up" className="text-center">
                 <Link href={"/archive"}>
                     <a>
-                        <p className="text-center border-2 border-black inline-block py-2 px-5 rounded-full hover:(bg-black  text-white) transition ease-in-out duration-400 mt-6 lg:mt-10" dark="hover:(bg-white text-black) border-white">View Archive</p>
+                        <p className="text-center border-2 border-black inline-block py-2 px-5 rounded-full hover:(bg-black  text-white) transition ease-in-out duration-400 mt-6 lg:mt-10" dark="hover:(bg-white text-black) border-white">查看全部</p>
                     </a>
                 </Link>
             </div>
