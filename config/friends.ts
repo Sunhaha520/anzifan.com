@@ -6,14 +6,14 @@ export type FriendType = {
 
 export const friends: FriendType[] = [
   {
-    url: 'https://www.xiaoayu.ren',
-    name: '阿宇の小站',
+    url: 'https://edu.kelejun.cn',
+    name: '可乐君的学术',
     img: 'https://cdn.jsdelivr.net/gh/Sunhaha520/picx-images-hosting@master/portrait.5n7ee6bgk7k0.webp',
   },
   {
-    url: 'https://think.xiaoayu.ren',
-    name: '可乐君的学术',
-    img: 'https://cdn.jsdelivr.net/gh/Sunhaha520/picx-images-hosting@master/portrait.5n7ee6bgk7k0.webp',
+    url: 'https://file.kelejun.cn',
+    name: '可乐君文件共享',
+    img: 'https://cdn.dribbble.com/userupload/16431089/file/original-4efb228b098c1d0e8a24aa7e0b478d94.png',
   },
   {
     url: 'https://blog.xiaoayu.ren',
