@@ -23,7 +23,7 @@ export const WidgetOverViewSmall: FC<{ posts: any[] }> = ({ posts }) => {
                         <div className="xs:text-xl leading-4 xs:leading-6 font-semibold text-sm">
                             <p className={`${Colors["orange"]?.text.normal} line-clamp-1`}>{dateMap.length} 篇文章</p>
                             <p className={`${Colors["pink"]?.text.normal} line-clamp-1`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个归档</p>
+                            <p className={`${Colors["blue"]?.text.normal} line-clamp-1`}>{categoryCount} 个分类</p>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ export const WidgetOverViewMedium: FC<{ posts: any[], fix?: boolean }> = ({ post
                         <div className={`text-lg leading-6 md:leading-7 ${fix ? "" : "lg:text-2xl"} font-semibold`}>
                             <p className={`${Colors["orange"]?.text.normal}`}>{dateMap.length} 篇文章</p>
                             <p className={`${Colors["pink"]?.text.normal}`}>{tagsAmount} 个话题</p>
-                            <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个归档</p>
+                            <p className={`${Colors["blue"]?.text.normal}`}>{categoryCount} 个分类</p>
                         </div>
                     </div>
                     <div className="flex flex-col justify-between ml-4 w-2/3 h-90%">
