@@ -72,7 +72,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
     <ThemeProvider attribute="class">
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-        <title>可乐君的个人主页</title>
+        <title>可乐君の小站</title>
         <meta name="description" content="可乐君の小站" />
         <link rel="apple-touch-icon" sizes="180x180" href="/color.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/color.png" />
