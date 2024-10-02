@@ -74,9 +74,9 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <title>可乐君の小站</title>
         <meta name="description" content="可乐君の小站" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/color.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/color.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/color.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="stylesheet" href="https://cdn.jkjoy.cn/LxgwWenKai_Webfonts/dist/LXGWWenKai-Bold.css" />
         <script defer src="https://status.xiaoayu.ren/script.js" data-website-id="f16983ff-10ab-49eb-a1ce-a5fca1ff70ba"></script>
