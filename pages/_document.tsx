@@ -38,6 +38,20 @@ export default function Document() {
             <body>
                 <Main />
                 <NextScript />
+                {/* Coze Chat SDK */}
+        <script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/cn/index.js" />
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            new CozeWebSDK.WebChatClient({
+              config: {
+                bot_id: '7454868265346121740',
+              },
+              componentProps: {
+                title: 'Coze',
+              },
+            });
+          `
+        }} />
             </body>
         </Html>
     )
