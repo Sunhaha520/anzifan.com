@@ -38,27 +38,6 @@ export default function Document() {
             <body>
                 <Main />
                 <NextScript />
-
-                {/* 异步加载的脚本 */}
-                <script
-                    src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/cn/index.js"
-                    async // 确保异步加载
-                />
-                <script
-                    dangerouslySetInnerHTML={{
-                        __html: `
-                            new CozeWebSDK.WebChatClient({
-                                config: {
-                                    bot_id: '7454868265346121740',
-                                },
-                                componentProps: {
-                                    title: 'Coze',
-                                },
-                            });
-                        `,
-                    }}
-                    async // 确保异步加载
-                />
                 
             </body>
         </Html>
