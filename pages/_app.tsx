@@ -111,6 +111,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
             componentProps: {
               title: '博客助手',
             },
+          },
           });
         }}
       />
