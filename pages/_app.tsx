@@ -97,8 +97,19 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
             config: {
               bot_id: '7454868265346121740',
             },
+            ui: {
+            base: {
+                icon: 'https://www.kelejun.cn/bot.gif',
+          },
+            footer: {
+                isShow: false,
+        },
+            chatBot: {
+                title: "博客助手",
+                uploadable: false,
+        },
             componentProps: {
-              title: 'Coze',
+              title: '博客助手',
             },
           });
         }}
