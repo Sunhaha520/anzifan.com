@@ -1,5 +1,4 @@
 import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script';
 import { GA_TRACKING_ID } from '../lib/gtag'
 
 
@@ -39,14 +38,13 @@ export default function Document() {
             <body>
                 <Main />
                 <NextScript />
-               {/* Coze Chat SDK */}
-                <Script
+
+                {/* 异步加载的脚本 */}
+                <script
                     src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/cn/index.js"
-                    strategy="lazyOnload" // 延迟加载
+                    async // 确保异步加载
                 />
-                <Script
-                    id="coze-chat"
-                    strategy="lazyOnload" // 延迟加载
+                <script
                     dangerouslySetInnerHTML={{
                         __html: `
                             new CozeWebSDK.WebChatClient({
@@ -59,6 +57,7 @@ export default function Document() {
                             });
                         `,
                     }}
+                    async // 确保异步加载
                 />
                 
             </body>
