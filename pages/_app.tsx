@@ -99,7 +99,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
             },
             ui: {
             base: {
-                icon: 'https://www.kelejun.cn/bot.gif',
+                icon: 'https://www.kelejun.cn/bot.png',
           },
             footer: {
                 isShow: false,
