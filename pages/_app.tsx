@@ -85,6 +85,23 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
       {getLayout(
         <Component {...pageProps} />
       )}
+
+      {/* 插入脚本 */}
+      <Script src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/cn/index.js" strategy="afterInteractive" />
+      <Script id="coze-web-sdk" strategy="afterInteractive">
+        {`
+          new CozeWebSDK.WebChatClient({
+            config: {
+              bot_id: '7454868265346121740',
+            },
+            componentProps: {
+              title: 'Coze',
+            },
+          });
+        `}
+      </Script>
+
+      
     </ThemeProvider>
   )
 }
