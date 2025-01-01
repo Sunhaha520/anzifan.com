@@ -29,9 +29,11 @@ type AppPropsWithLayout = AppProps & {
 config.autoAddCss = false
 library.add(fab)
 
+// 声明全局变量
 declare global {
   interface Window {
     _hmt: any;
+    CozeWebSDK: any; // 添加 CozeWebSDK 的声明
   }
 }
 
@@ -67,33 +69,6 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
     document.head.appendChild(link);
   }, []);
 
-  // 动态插入脚本
-  useEffect(() => {
-    const script1 = document.createElement('script');
-    script1.src = 'https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/cn/index.js';
-    script1.async = true;
-
-    const script2 = document.createElement('script');
-    script2.text = `
-      new CozeWebSDK.WebChatClient({
-        config: {
-          bot_id: '7454868265346121740',
-        },
-        componentProps: {
-          title: 'Coze',
-        },
-      });
-    `;
-
-    document.body.appendChild(script1);
-    document.body.appendChild(script2);
-
-    return () => {
-      document.body.removeChild(script1);
-      document.body.removeChild(script2);
-    };
-  }, []);
-
   const getLayout = Component.getLayout || ((page: any) => <BlogLayout>{page}</BlogLayout>);
 
   return (
@@ -118,7 +93,7 @@ function MyApp({ Component, pageProps, router }: AppPropsWithLayout) {
         src="https://lf-cdn.coze.cn/obj/unpkg/flow-platform/chat-app-sdk/1.1.0-beta.0/libs/cn/index.js"
         strategy="afterInteractive"
         onLoad={() => {
-          new CozeWebSDK.WebChatClient({
+          new window.CozeWebSDK.WebChatClient({
             config: {
               bot_id: '7454868265346121740',
             },
